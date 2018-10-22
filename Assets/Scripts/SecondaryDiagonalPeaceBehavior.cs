@@ -4,11 +4,11 @@ using UnityEngine;
 
 namespace TicTacToe
 {
-    public class SecondaryDiagonalPeaceBehavior : PeaceBehavior
+    public class SecondaryDiagonalPeaceBehavior : AbstractPeaceBehavior
     {
         public override bool CheckPeaceMatch(Board board)
         {
-            return base.CheckPeaceMatch(board);
+            return false;
         }
     }
 }
