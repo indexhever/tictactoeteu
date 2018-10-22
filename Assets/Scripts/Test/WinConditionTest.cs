@@ -63,5 +63,41 @@ namespace TicTacToe.Test
 
             Assert.AreEqual(currentPeaceTouched.CheckPeaceMatch(board), true);
         }
+
+        [Test]
+        public void SecondaryDiagonalPeaceWinConditionPasses()
+        {
+            int boardSize = 3;
+            Board board = new Board(boardSize);
+            Peace currentPeaceTouched = board.GetPeace(2, 0);
+            Assert.AreEqual(currentPeaceTouched.Behaviors[1].ToString(), "TicTacToe.SecondaryDiagonalPeaceBehavior");
+
+            // secondary diagonal with same Icon
+            board.GetPeace(2, 0).Touch(PeaceIcon.X);
+            board.GetPeace(1, 1).Touch(PeaceIcon.X);
+            board.GetPeace(0, 2).Touch(PeaceIcon.X);
+
+            Assert.AreEqual(currentPeaceTouched.CheckPeaceMatch(board), true);
+
+            // secondary diagonal with one different element
+            board.GetPeace(2, 0).Touch(PeaceIcon.X);
+            board.GetPeace(1, 1).Touch(PeaceIcon.O);
+            board.GetPeace(0, 2).Touch(PeaceIcon.X);
+
+            Assert.AreEqual(currentPeaceTouched.CheckPeaceMatch(board), false);
+
+            // reset diagonal elements
+            board.GetPeace(2, 0).Touch(PeaceIcon.X);
+            board.GetPeace(1, 1).Touch(PeaceIcon.O);
+            board.GetPeace(0, 2).Touch(PeaceIcon.O);
+
+            Assert.AreEqual(currentPeaceTouched.CheckPeaceMatch(board), false);
+
+            // set vertical elements to be the same as currentPeace
+            board.GetPeace(1, 1).Touch(PeaceIcon.X);
+            board.GetPeace(0, 2).Touch(PeaceIcon.X);
+
+            Assert.AreEqual(currentPeaceTouched.CheckPeaceMatch(board), true);
+        }
     }
 }
