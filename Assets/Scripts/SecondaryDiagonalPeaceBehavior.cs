@@ -8,7 +8,13 @@ namespace TicTacToe
     {
         public override bool CheckPeaceMatch(Board board)
         {
-            return false;
+            for (int i = 0; i < board.BoardSize; i++)
+            {
+                if (!Peace.IsIconEqual(board.GetPeace(board.BoardSize-(i+1), i)))
+                    return false;
+            }
+
+            return true;
         }
     }
 }
