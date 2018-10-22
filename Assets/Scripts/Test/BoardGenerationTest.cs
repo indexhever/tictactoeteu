@@ -41,8 +41,8 @@ namespace TicTacToe.Test
 
             Assert.AreEqual(board.GetPeace(0, 1).Behaviors.Count, 1);
             Assert.AreEqual(board.GetPeace(1, 2).Behaviors.Count, 1);
-            Assert.AreEqual(board.GetPeace(2, 0).Behaviors.Count, 1);
-            Assert.AreEqual(board.GetPeace(1, 1).Behaviors.Count, 2);
+            Assert.AreEqual(board.GetPeace(2, 0).Behaviors.Count, 2);
+            Assert.AreEqual(board.GetPeace(1, 1).Behaviors.Count, 3);
         }
     }
 }
