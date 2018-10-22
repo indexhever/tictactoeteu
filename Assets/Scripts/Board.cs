@@ -7,11 +7,22 @@ namespace TicTacToe
     public class Board
     {
         private int boardSize;
+        public int BoardSize
+        {
+            get
+            {
+                return boardSize;
+            }
+            private set
+            {
+                boardSize = value;
+            }
+        }
         private Peace[,] peaces;
 
         public Board(int boardSize)
         {
-            this.boardSize = boardSize;
+            BoardSize = boardSize;
             peaces = new Peace[boardSize,boardSize];
 
             InitializePositions();
@@ -19,7 +30,7 @@ namespace TicTacToe
 
         private void InitializePositions()
         {
-            for(int i=0; i<boardSize; i++)
+            for(int i=0; i<BoardSize; i++)
             {
                 for (int j = 0; j < boardSize; j++)
                 {
@@ -30,19 +41,18 @@ namespace TicTacToe
 
         private Peace CreatePeace(int row, int column)
         {
-            List<PeaceBehavior> peaceBehaviors = CreatePeaceBehavior(row, column);
-            Peace newPeace = new Peace(peaceBehaviors);
+            List<AbstractPeaceBehavior> peaceBehaviors = CreatePeaceBehavior(row, column);
+            Peace newPeace = new Peace(peaceBehaviors, row, column);
             return newPeace;
         }
 
-        private List<PeaceBehavior> CreatePeaceBehavior(int row, int column)
+        private List<AbstractPeaceBehavior> CreatePeaceBehavior(int row, int column)
         {
-            List<PeaceBehavior> peaceBehaviors = new List<PeaceBehavior>();
-            if(!IsMainDiagonalPeace(row, column) && !IsSecondaryDiagonalPeace(row, column))
-            {
-                peaceBehaviors.Add(new PeaceBehavior());
+            List<AbstractPeaceBehavior> peaceBehaviors = new List<AbstractPeaceBehavior>();
+            peaceBehaviors.Add(new NormalPeaceBehavior());
+
+            if (!IsMainDiagonalPeace(row, column) && !IsSecondaryDiagonalPeace(row, column))
                 return peaceBehaviors;
-            }
 
             if (IsMainDiagonalPeace(row, column))
                 peaceBehaviors.Add(new MainDiagonalPeaceBehavior());
@@ -60,7 +70,7 @@ namespace TicTacToe
 
         private bool IsSecondaryDiagonalPeace(int row, int column)
         {
-            return row + column == boardSize - 1;
+            return row + column == BoardSize - 1;
         }
 
         public Peace GetPeace(int row, int column)
