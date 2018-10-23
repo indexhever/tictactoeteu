@@ -14,6 +14,7 @@ namespace TicTacToe
     {
         private List<AbstractPeaceBehavior> behaviors;
         private int row;
+        private Board board;
         public int Row
         {
             get
@@ -64,12 +65,13 @@ namespace TicTacToe
             }
         }
 
-        public Peace(List<AbstractPeaceBehavior> behaviors, int row, int column)
+        public Peace(List<AbstractPeaceBehavior> behaviors, int row, int column, Board board)
         {
             Behaviors = behaviors;
             Row = row;
             Column = column;
             InitializeBehaviors();
+            this.board = board;
         }
 
         private void InitializeBehaviors()
@@ -80,7 +82,7 @@ namespace TicTacToe
             }
         }
 
-        public bool CheckPeaceMatch(Board board)
+        public bool CheckPeaceMatch()
         {
             for(int i=0; i < Behaviors.Count; i++)
             {
@@ -94,6 +96,7 @@ namespace TicTacToe
         public void Touch(PeaceIcon peaceIcon)
         {
             Icon = peaceIcon;
+            board.PeaceTouched();
         }
 
         public bool IsTouched()
