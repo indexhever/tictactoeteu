@@ -6,6 +6,18 @@ namespace TicTacToe
 {
     public class Board
     {
+        private int amountPeacesUntouched;
+        public int AmountPeacesUntouched
+        {
+            get
+            {
+                return amountPeacesUntouched;
+            }
+            private set
+            {
+                amountPeacesUntouched = value;
+            }
+        }
         private int boardSize;
         public int BoardSize
         {
@@ -26,6 +38,7 @@ namespace TicTacToe
             peaces = new Peace[boardSize,boardSize];
 
             InitializePositions();
+            AmountPeacesUntouched = boardSize * boardSize;
         }
 
         private void InitializePositions()
@@ -42,7 +55,7 @@ namespace TicTacToe
         private Peace CreatePeace(int row, int column)
         {
             List<AbstractPeaceBehavior> peaceBehaviors = CreatePeaceBehavior(row, column);
-            Peace newPeace = new Peace(peaceBehaviors, row, column);
+            Peace newPeace = new Peace(peaceBehaviors, row, column, this);
             return newPeace;
         }
 
@@ -76,6 +89,17 @@ namespace TicTacToe
         public Peace GetPeace(int row, int column)
         {
             return peaces[row, column];
+        }
+
+        public void PeaceTouched()
+        {
+            --AmountPeacesUntouched;
+
+            // call draw
+            if (AmountPeacesUntouched <= 0)
+            {
+
+            }            
         }
     }
 }
