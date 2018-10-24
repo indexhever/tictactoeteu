@@ -6,6 +6,18 @@ namespace TicTacToe
 {
     public class Board
     {
+        IObjectiveController objectiveController;
+        public IObjectiveController ObjectiveController
+        {
+            get
+            {
+                return objectiveController;
+            }
+            set
+            {
+                objectiveController = value;
+            }
+        }
         private int amountPeacesUntouched;
         public int AmountPeacesUntouched
         {
@@ -32,13 +44,21 @@ namespace TicTacToe
         }
         private Peace[,] peaces;
 
-        public Board(int boardSize)
+        public Board(int boardSize, IObjectiveController objectiveController)
+        {
+            
+            ObjectiveController = objectiveController;
+            Initialize(boardSize);
+        }
+
+        private void Initialize(int boardSize)
         {
             BoardSize = boardSize;
-            peaces = new Peace[boardSize,boardSize];
+            peaces = new Peace[boardSize, boardSize];
 
             InitializePositions();
             AmountPeacesUntouched = boardSize * boardSize;
+            ObjectiveController = objectiveController;
         }
 
         private void InitializePositions()
@@ -98,7 +118,7 @@ namespace TicTacToe
             // call draw
             if (AmountPeacesUntouched <= 0)
             {
-
+                ObjectiveController.LoseGame();
             }            
         }
     }
