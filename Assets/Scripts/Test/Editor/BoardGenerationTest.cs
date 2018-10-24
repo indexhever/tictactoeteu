@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using UnityEngine.TestTools;
 using NUnit.Framework;
+using UnityEditor;
+using NSubstitute;
 using System.Collections;
 
 namespace TicTacToe.Test
@@ -26,18 +28,21 @@ namespace TicTacToe.Test
         */
 
         [Test]
-        public void BoardGenerationTestPasses()
+        public void BoardGenerationWorks_WhenItIsInitiated()
         {
             int boardSize = 3;
-            Board board = new Board(boardSize);
+            IObjectiveController objectiveController = NSubstitute.Substitute.For<IObjectiveController>();
+            Board board = new Board(boardSize, objectiveController);
+
             Assert.AreNotEqual(board.GetPeace(1, 1), null);
         }
 
         [Test]
-        public void PeacesBehaviorTestPasses()
+        public void PeacesWithCorrectBehavior_AfterInitialized()
         {
             int boardSize = 3;
-            Board board = new Board(boardSize);
+            IObjectiveController objectiveController = NSubstitute.Substitute.For<IObjectiveController>();
+            Board board = new Board(boardSize, objectiveController);
 
             Assert.AreEqual(board.GetPeace(0, 1).Behaviors.Count, 1);
             Assert.AreEqual(board.GetPeace(1, 2).Behaviors.Count, 1);
