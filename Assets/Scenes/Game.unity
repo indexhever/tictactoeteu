@@ -187,7 +187,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8eb80d640935d3443ab26ed8c953102e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  peacePool: {fileID: 794996901}
+  piecePool: {fileID: 794996901}
 --- !u!4 &794996900
 Transform:
   m_ObjectHideFlags: 0

@@ -3,6 +3,6 @@
     public interface IBoardController
     {
         void Initialize();
-        void SpawnPeace(Peace peace);
+        void SpawnPiece(Piece peace);
     }
 }

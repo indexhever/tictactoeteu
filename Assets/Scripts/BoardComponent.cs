@@ -10,18 +10,18 @@ namespace TicTacToe
     {
         private Board board;
         [SerializeField]
-        ObjectPoolController peacePool;
+        ObjectPoolController piecePool;
 
         public void Initialize()
         {
             board = new Board(3, ObjectiveControler.Instance, this);
         }
 
-        public void SpawnPeace(Peace peace)
+        public void SpawnPiece(Piece piece)
         {
-            GameObject newPeaceGameObj = peacePool.GetObject();
-            PeaceComponent peaceComponent = newPeaceGameObj.GetComponent<PeaceComponent>();
-            peaceComponent.Initialize(peace);
+            GameObject newPieceGameObj = piecePool.GetObject();
+            PieceComponent peaceComponent = newPieceGameObj.GetComponent<PieceComponent>();
+            peaceComponent.Initialize(piece);
         }
     }
 }

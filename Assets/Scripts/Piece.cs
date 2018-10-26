@@ -4,15 +4,15 @@ using UnityEngine;
 
 namespace TicTacToe
 {
-    public enum PeaceIcon
+    public enum PieceIcon
     {
         None,
         O,
         X
     }
-    public class Peace
+    public class Piece
     {
-        private List<AbstractPeaceBehavior> behaviors;
+        private List<AbstractPieceBehavior> behaviors;
         private int row;
         private Board board;
         public int Row
@@ -39,8 +39,8 @@ namespace TicTacToe
             }
         }
 
-        private PeaceIcon icon;
-        public PeaceIcon Icon
+        private PieceIcon icon;
+        public PieceIcon Icon
         {
             get
             {
@@ -52,7 +52,7 @@ namespace TicTacToe
             }
         }
 
-        public List<AbstractPeaceBehavior> Behaviors
+        public List<AbstractPieceBehavior> Behaviors
         {
             get
             {
@@ -65,7 +65,7 @@ namespace TicTacToe
             }
         }
 
-        public Peace(List<AbstractPeaceBehavior> behaviors, int row, int column, Board board)
+        public Piece(List<AbstractPieceBehavior> behaviors, int row, int column, Board board)
         {
             Behaviors = behaviors;
             Row = row;
@@ -78,38 +78,38 @@ namespace TicTacToe
         {
             for(int i=0; i < Behaviors.Count; i++)
             {
-                Behaviors[i].Peace = this;
+                Behaviors[i].Piece = this;
             }
         }
 
-        public bool CheckPeaceMatch()
+        public bool CheckPieceMatch()
         {
             for(int i=0; i < Behaviors.Count; i++)
             {
-                if (Behaviors[i].CheckPeaceMatch(board))
+                if (Behaviors[i].CheckPieceMatch(board))
                     return true;
             }
 
             return false;
         }
 
-        public void Touch(PeaceIcon peaceIcon)
+        public void Touch(PieceIcon pieceIcon)
         {
-            Icon = peaceIcon;
-            board.PeaceTouched();
+            Icon = pieceIcon;
+            board.PieceTouched();
         }
 
         public bool IsTouched()
         {
-            return Icon != PeaceIcon.None;
+            return Icon != PieceIcon.None;
         }
 
-        public bool IsIconEqual(Peace otherPeace)
+        public bool IsIconEqual(Piece otherPiece)
         {
             if (!IsTouched())
                 return false;
 
-            return Icon == otherPeace.Icon;
+            return Icon == otherPiece.Icon;
         }
     }
 }

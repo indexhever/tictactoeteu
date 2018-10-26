@@ -4,14 +4,14 @@ using UnityEngine;
 
 namespace TicTacToe
 {
-    public class NormalPeaceBehavior : AbstractPeaceBehavior
+    public class NormalPieceBehavior : AbstractPieceBehavior
     {
         /// <summary>
         /// Checks if this peace matches with other peaces in peace's same horizontal or vertical
         /// </summary>
         /// <param name="board"></param>
         /// <returns></returns>
-        public override bool CheckPeaceMatch(Board board)
+        public override bool CheckPieceMatch(Board board)
         {
             bool hasHorizontalMatch = true;
             bool hasVerticalMatch = true;
@@ -30,12 +30,12 @@ namespace TicTacToe
 
         private bool HasHorizontalMatch(Board board, int i)
         {
-            return Peace.IsIconEqual(board.GetPeace(Peace.Row, i));
+            return Piece.IsIconEqual(board.GetPiece(Piece.Row, i));
         }
 
         private bool HasVerticalMatch(Board board, int i)
         {
-            return Peace.IsIconEqual(board.GetPeace(i, Peace.Column));
+            return Piece.IsIconEqual(board.GetPiece(i, Piece.Column));
         }
     }
 }

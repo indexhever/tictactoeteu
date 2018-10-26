@@ -4,18 +4,18 @@ using UnityEngine;
 
 namespace TicTacToe
 {
-    public class MainDiagonalPeaceBehavior : AbstractPeaceBehavior
+    public class MainDiagonalPieceBehavior : AbstractPieceBehavior
     {
         /// <summary>
-        /// Checks if this peace matches with other peaces in board main diagonal
+        /// Checks if this piece matches with other pieces in board main diagonal
         /// </summary>
         /// <param name="board"></param>
         /// <returns></returns>
-        public override bool CheckPeaceMatch(Board board)
+        public override bool CheckPieceMatch(Board board)
         {
             for(int i = 0; i < board.BoardSize; i++)
             {
-                if (!Peace.IsIconEqual(board.GetPeace(i, i)))
+                if (!Piece.IsIconEqual(board.GetPiece(i, i)))
                     return false;
             }
 

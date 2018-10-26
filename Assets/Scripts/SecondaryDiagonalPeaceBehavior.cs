@@ -4,13 +4,13 @@ using UnityEngine;
 
 namespace TicTacToe
 {
-    public class SecondaryDiagonalPeaceBehavior : AbstractPeaceBehavior
+    public class SecondaryDiagonalPieceBehavior : AbstractPieceBehavior
     {
-        public override bool CheckPeaceMatch(Board board)
+        public override bool CheckPieceMatch(Board board)
         {
             for (int i = 0; i < board.BoardSize; i++)
             {
-                if (!Peace.IsIconEqual(board.GetPeace(board.BoardSize-(i+1), i)))
+                if (!Piece.IsIconEqual(board.GetPiece(board.BoardSize-(i+1), i)))
                     return false;
             }
 
