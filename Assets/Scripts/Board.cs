@@ -18,6 +18,7 @@ namespace TicTacToe
                 objectiveController = value;
             }
         }
+        IBoardController boardController;
         private int amountPeacesUntouched;
         public int AmountPeacesUntouched
         {
@@ -44,10 +45,11 @@ namespace TicTacToe
         }
         private Peace[,] peaces;
 
-        public Board(int boardSize, IObjectiveController objectiveController)
+        public Board(int boardSize, IObjectiveController objectiveController, IBoardController boardController)
         {
             
             ObjectiveController = objectiveController;
+            this.boardController = boardController;
             Initialize(boardSize);
         }
 
@@ -68,6 +70,7 @@ namespace TicTacToe
                 for (int j = 0; j < boardSize; j++)
                 {
                     peaces[i, j] = CreatePeace(i, j);
+                    boardController.SpawnPeace(peaces[i, j]);
                 }
             }
         }

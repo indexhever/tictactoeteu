@@ -14,7 +14,8 @@ namespace TicTacToe.Test
         {
             int boardSize = 3;
             IObjectiveController objectiveController = NSubstitute.Substitute.For<IObjectiveController>();
-            Board board = new Board(boardSize, objectiveController);
+            IBoardController boardController = NSubstitute.Substitute.For<IBoardController>();
+            Board board = new Board(boardSize, objectiveController, boardController);
             Peace currentPeaceTouched = board.GetPeace(0, 1);
             Assert.AreEqual(currentPeaceTouched.Behaviors[0].ToString(), "TicTacToe.NormalPeaceBehavior");
             
@@ -33,7 +34,8 @@ namespace TicTacToe.Test
         {
             int boardSize = 3;
             IObjectiveController objectiveController = NSubstitute.Substitute.For<IObjectiveController>();
-            Board board = new Board(boardSize, objectiveController);
+            IBoardController boardController = NSubstitute.Substitute.For<IBoardController>();
+            Board board = new Board(boardSize, objectiveController, boardController);
             Peace currentPeaceTouched = board.GetPeace(2, 0);
             Assert.AreEqual(currentPeaceTouched.Behaviors[0].ToString(), "TicTacToe.NormalPeaceBehavior");
             
@@ -52,7 +54,8 @@ namespace TicTacToe.Test
         {
             int boardSize = 3;
             IObjectiveController objectiveController = NSubstitute.Substitute.For<IObjectiveController>();
-            Board board = new Board(boardSize, objectiveController);
+            IBoardController boardController = NSubstitute.Substitute.For<IBoardController>();
+            Board board = new Board(boardSize, objectiveController, boardController);
             Peace currentPeaceTouched = board.GetPeace(0, 0);
             Assert.AreEqual(currentPeaceTouched.Behaviors[1].ToString(), "TicTacToe.MainDiagonalPeaceBehavior");
 
@@ -89,7 +92,8 @@ namespace TicTacToe.Test
         {
             int boardSize = 3;
             IObjectiveController objectiveController = NSubstitute.Substitute.For<IObjectiveController>();
-            Board board = new Board(boardSize, objectiveController);
+            IBoardController boardController = NSubstitute.Substitute.For<IBoardController>();
+            Board board = new Board(boardSize, objectiveController, boardController);
             Peace currentPeaceTouched = board.GetPeace(2, 0);
             Assert.AreEqual(currentPeaceTouched.Behaviors[1].ToString(), "TicTacToe.SecondaryDiagonalPeaceBehavior");
 
