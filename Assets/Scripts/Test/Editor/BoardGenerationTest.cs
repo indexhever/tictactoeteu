@@ -9,24 +9,6 @@ namespace TicTacToe.Test
 {
     public class BoardGenerationTest
     {
-        /*
-        [Test]
-        public void NewPlayModeTestBoardGenerationTestSimplePasses()
-        {
-            // Use the Assert class to test conditions.
-        }
-
-        // A UnityTest behaves like a coroutine in PlayMode
-        // and allows you to yield null to skip a frame in EditMode
-        [UnityTest]
-        public IEnumerator NewPlayModeTestBoardGenerationTestWithEnumeratorPasses()
-        {
-            // Use the Assert class to test conditions.
-            // yield to skip a frame
-            yield return null;
-        }
-        */
-
         [Test]
         public void BoardGenerationWorks_WhenItIsInitiated()
         {
@@ -35,21 +17,21 @@ namespace TicTacToe.Test
             IBoardController boardController = NSubstitute.Substitute.For<IBoardController>();
             Board board = new Board(boardSize, objectiveController, boardController);
 
-            Assert.AreNotEqual(board.GetPeace(1, 1), null);
+            Assert.AreNotEqual(board.GetPiece(1, 1), null);
         }
 
         [Test]
-        public void PeacesWithCorrectBehavior_AfterInitialized()
+        public void PiecesWithCorrectBehavior_AfterInitialized()
         {
             int boardSize = 3;
             IObjectiveController objectiveController = NSubstitute.Substitute.For<IObjectiveController>();
             IBoardController boardController = NSubstitute.Substitute.For<IBoardController>();
             Board board = new Board(boardSize, objectiveController, boardController);
 
-            Assert.AreEqual(board.GetPeace(0, 1).Behaviors.Count, 1);
-            Assert.AreEqual(board.GetPeace(1, 2).Behaviors.Count, 1);
-            Assert.AreEqual(board.GetPeace(2, 0).Behaviors.Count, 2);
-            Assert.AreEqual(board.GetPeace(1, 1).Behaviors.Count, 3);
+            Assert.AreEqual(board.GetPiece(0, 1).Behaviors.Count, 1);
+            Assert.AreEqual(board.GetPiece(1, 2).Behaviors.Count, 1);
+            Assert.AreEqual(board.GetPiece(2, 0).Behaviors.Count, 2);
+            Assert.AreEqual(board.GetPiece(1, 1).Behaviors.Count, 3);
         }
     }
 }

@@ -19,16 +19,16 @@ namespace TicTacToe
             }
         }
         IBoardController boardController;
-        private int amountPeacesUntouched;
-        public int AmountPeacesUntouched
+        private int amountPiecesUntouched;
+        public int AmountPiecesUntouched
         {
             get
             {
-                return amountPeacesUntouched;
+                return amountPiecesUntouched;
             }
             private set
             {
-                amountPeacesUntouched = value;
+                amountPiecesUntouched = value;
             }
         }
         private int boardSize;
@@ -43,7 +43,7 @@ namespace TicTacToe
                 boardSize = value;
             }
         }
-        private Peace[,] peaces;
+        private Piece[,] pieces;
 
         public Board(int boardSize, IObjectiveController objectiveController, IBoardController boardController)
         {
@@ -56,10 +56,10 @@ namespace TicTacToe
         private void Initialize(int boardSize)
         {
             BoardSize = boardSize;
-            peaces = new Peace[boardSize, boardSize];
+            pieces = new Piece[boardSize, boardSize];
 
             InitializePositions();
-            AmountPeacesUntouched = boardSize * boardSize;
+            AmountPiecesUntouched = boardSize * boardSize;
             ObjectiveController = objectiveController;
         }
 
@@ -69,57 +69,57 @@ namespace TicTacToe
             {
                 for (int j = 0; j < boardSize; j++)
                 {
-                    peaces[i, j] = CreatePeace(i, j);
-                    boardController.SpawnPeace(peaces[i, j]);
+                    pieces[i, j] = CreatePiece(i, j);
+                    boardController.SpawnPiece(pieces[i, j]);
                 }
             }
         }
 
-        private Peace CreatePeace(int row, int column)
+        private Piece CreatePiece(int row, int column)
         {
-            List<AbstractPeaceBehavior> peaceBehaviors = CreatePeaceBehavior(row, column);
-            Peace newPeace = new Peace(peaceBehaviors, row, column, this);
-            return newPeace;
+            List<AbstractPieceBehavior> pieceBehaviors = CreatePieceBehavior(row, column);
+            Piece newPiece = new Piece(pieceBehaviors, row, column, this);
+            return newPiece;
         }
 
-        private List<AbstractPeaceBehavior> CreatePeaceBehavior(int row, int column)
+        private List<AbstractPieceBehavior> CreatePieceBehavior(int row, int column)
         {
-            List<AbstractPeaceBehavior> peaceBehaviors = new List<AbstractPeaceBehavior>();
-            peaceBehaviors.Add(new NormalPeaceBehavior());
+            List<AbstractPieceBehavior> pieceBehaviors = new List<AbstractPieceBehavior>();
+            pieceBehaviors.Add(new NormalPieceBehavior());
 
-            if (!IsMainDiagonalPeace(row, column) && !IsSecondaryDiagonalPeace(row, column))
-                return peaceBehaviors;
+            if (!IsMainDiagonalPiece(row, column) && !IsSecondaryDiagonalPiece(row, column))
+                return pieceBehaviors;
 
-            if (IsMainDiagonalPeace(row, column))
-                peaceBehaviors.Add(new MainDiagonalPeaceBehavior());
+            if (IsMainDiagonalPiece(row, column))
+                pieceBehaviors.Add(new MainDiagonalPieceBehavior());
 
-            if (IsSecondaryDiagonalPeace(row, column))
-                peaceBehaviors.Add(new SecondaryDiagonalPeaceBehavior());
+            if (IsSecondaryDiagonalPiece(row, column))
+                pieceBehaviors.Add(new SecondaryDiagonalPieceBehavior());
 
-            return peaceBehaviors;
+            return pieceBehaviors;
         }
 
-        private bool IsMainDiagonalPeace(int row, int column)
+        private bool IsMainDiagonalPiece(int row, int column)
         {
             return row == column;
         }
 
-        private bool IsSecondaryDiagonalPeace(int row, int column)
+        private bool IsSecondaryDiagonalPiece(int row, int column)
         {
             return row + column == BoardSize - 1;
         }
 
-        public Peace GetPeace(int row, int column)
+        public Piece GetPiece(int row, int column)
         {
-            return peaces[row, column];
+            return pieces[row, column];
         }
 
-        public void PeaceTouched()
+        public void PieceTouched()
         {
-            --AmountPeacesUntouched;
+            --AmountPiecesUntouched;
 
             // call draw
-            if (AmountPeacesUntouched <= 0)
+            if (AmountPiecesUntouched <= 0)
             {
                 ObjectiveController.LoseGame();
             }            

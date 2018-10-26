@@ -16,17 +16,17 @@ namespace TicTacToe.Test
             IObjectiveController objectiveController = NSubstitute.Substitute.For<IObjectiveController>();
             IBoardController boardController = NSubstitute.Substitute.For<IBoardController>();
             Board board = new Board(boardSize, objectiveController, boardController);
-            Peace currentPeaceTouched = board.GetPeace(0, 1);
-            Assert.AreEqual(currentPeaceTouched.Behaviors[0].ToString(), "TicTacToe.NormalPeaceBehavior");
+            Piece currentPieceTouched = board.GetPiece(0, 1);
+            Assert.AreEqual(currentPieceTouched.Behaviors[0].ToString(), "TicTacToe.NormalPieceBehavior");
             
-            board.GetPeace(0, 1).Touch(PeaceIcon.X);
-            board.GetPeace(0, 0).Touch(PeaceIcon.X);
-            board.GetPeace(0, 2).Touch(PeaceIcon.X);
-            Assert.AreEqual(currentPeaceTouched.CheckPeaceMatch(), true);
-            board.GetPeace(0, 1).Touch(PeaceIcon.X);
-            board.GetPeace(0, 0).Touch(PeaceIcon.O);
-            board.GetPeace(0, 2).Touch(PeaceIcon.X);
-            Assert.AreEqual(currentPeaceTouched.CheckPeaceMatch(), false);
+            board.GetPiece(0, 1).Touch(PieceIcon.X);
+            board.GetPiece(0, 0).Touch(PieceIcon.X);
+            board.GetPiece(0, 2).Touch(PieceIcon.X);
+            Assert.AreEqual(currentPieceTouched.CheckPieceMatch(), true);
+            board.GetPiece(0, 1).Touch(PieceIcon.X);
+            board.GetPiece(0, 0).Touch(PieceIcon.O);
+            board.GetPiece(0, 2).Touch(PieceIcon.X);
+            Assert.AreEqual(currentPieceTouched.CheckPieceMatch(), false);
         }
 
         [Test]
@@ -36,17 +36,17 @@ namespace TicTacToe.Test
             IObjectiveController objectiveController = NSubstitute.Substitute.For<IObjectiveController>();
             IBoardController boardController = NSubstitute.Substitute.For<IBoardController>();
             Board board = new Board(boardSize, objectiveController, boardController);
-            Peace currentPeaceTouched = board.GetPeace(2, 0);
-            Assert.AreEqual(currentPeaceTouched.Behaviors[0].ToString(), "TicTacToe.NormalPeaceBehavior");
+            Piece currentPieceTouched = board.GetPiece(2, 0);
+            Assert.AreEqual(currentPieceTouched.Behaviors[0].ToString(), "TicTacToe.NormalPieceBehavior");
             
-            board.GetPeace(0, 0).Touch(PeaceIcon.X);
-            board.GetPeace(1, 0).Touch(PeaceIcon.X);
-            board.GetPeace(2, 0).Touch(PeaceIcon.X);
-            Assert.AreEqual(currentPeaceTouched.CheckPeaceMatch(), true);
-            board.GetPeace(0, 0).Touch(PeaceIcon.X);
-            board.GetPeace(1, 0).Touch(PeaceIcon.O);
-            board.GetPeace(2, 0).Touch(PeaceIcon.X);
-            Assert.AreEqual(currentPeaceTouched.CheckPeaceMatch(), false);
+            board.GetPiece(0, 0).Touch(PieceIcon.X);
+            board.GetPiece(1, 0).Touch(PieceIcon.X);
+            board.GetPiece(2, 0).Touch(PieceIcon.X);
+            Assert.AreEqual(currentPieceTouched.CheckPieceMatch(), true);
+            board.GetPiece(0, 0).Touch(PieceIcon.X);
+            board.GetPiece(1, 0).Touch(PieceIcon.O);
+            board.GetPiece(2, 0).Touch(PieceIcon.X);
+            Assert.AreEqual(currentPieceTouched.CheckPieceMatch(), false);
         }
 
         [Test]
@@ -56,35 +56,35 @@ namespace TicTacToe.Test
             IObjectiveController objectiveController = NSubstitute.Substitute.For<IObjectiveController>();
             IBoardController boardController = NSubstitute.Substitute.For<IBoardController>();
             Board board = new Board(boardSize, objectiveController, boardController);
-            Peace currentPeaceTouched = board.GetPeace(0, 0);
-            Assert.AreEqual(currentPeaceTouched.Behaviors[1].ToString(), "TicTacToe.MainDiagonalPeaceBehavior");
+            Piece currentPieceTouched = board.GetPiece(0, 0);
+            Assert.AreEqual(currentPieceTouched.Behaviors[1].ToString(), "TicTacToe.MainDiagonalPieceBehavior");
 
             // main diagonal with same Icon
-            board.GetPeace(0, 0).Touch(PeaceIcon.X);
-            board.GetPeace(1, 1).Touch(PeaceIcon.X);
-            board.GetPeace(2, 2).Touch(PeaceIcon.X);
+            board.GetPiece(0, 0).Touch(PieceIcon.X);
+            board.GetPiece(1, 1).Touch(PieceIcon.X);
+            board.GetPiece(2, 2).Touch(PieceIcon.X);
 
-            Assert.AreEqual(currentPeaceTouched.CheckPeaceMatch(), true);
+            Assert.AreEqual(currentPieceTouched.CheckPieceMatch(), true);
 
             // main diagonal with one different element
-            board.GetPeace(0, 0).Touch(PeaceIcon.X);
-            board.GetPeace(1, 1).Touch(PeaceIcon.O);
-            board.GetPeace(2, 2).Touch(PeaceIcon.X);
+            board.GetPiece(0, 0).Touch(PieceIcon.X);
+            board.GetPiece(1, 1).Touch(PieceIcon.O);
+            board.GetPiece(2, 2).Touch(PieceIcon.X);
 
-            Assert.AreEqual(currentPeaceTouched.CheckPeaceMatch(), false);
+            Assert.AreEqual(currentPieceTouched.CheckPieceMatch(), false);
 
             // reset diagonal elements
-            board.GetPeace(0, 0).Touch(PeaceIcon.X);
-            board.GetPeace(1, 1).Touch(PeaceIcon.O);
-            board.GetPeace(2, 2).Touch(PeaceIcon.O);
+            board.GetPiece(0, 0).Touch(PieceIcon.X);
+            board.GetPiece(1, 1).Touch(PieceIcon.O);
+            board.GetPiece(2, 2).Touch(PieceIcon.O);
 
-            Assert.AreEqual(currentPeaceTouched.CheckPeaceMatch(), false);
+            Assert.AreEqual(currentPieceTouched.CheckPieceMatch(), false);
 
-            // set vertical elements to be the same as currentPeace
-            board.GetPeace(1, 0).Touch(PeaceIcon.X);
-            board.GetPeace(2, 0).Touch(PeaceIcon.X);
+            // set vertical elements to be the same as currentPiece
+            board.GetPiece(1, 0).Touch(PieceIcon.X);
+            board.GetPiece(2, 0).Touch(PieceIcon.X);
 
-            Assert.AreEqual(currentPeaceTouched.CheckPeaceMatch(), true);
+            Assert.AreEqual(currentPieceTouched.CheckPieceMatch(), true);
         }
 
         [Test]
@@ -94,35 +94,35 @@ namespace TicTacToe.Test
             IObjectiveController objectiveController = NSubstitute.Substitute.For<IObjectiveController>();
             IBoardController boardController = NSubstitute.Substitute.For<IBoardController>();
             Board board = new Board(boardSize, objectiveController, boardController);
-            Peace currentPeaceTouched = board.GetPeace(2, 0);
-            Assert.AreEqual(currentPeaceTouched.Behaviors[1].ToString(), "TicTacToe.SecondaryDiagonalPeaceBehavior");
+            Piece currentPieceTouched = board.GetPiece(2, 0);
+            Assert.AreEqual(currentPieceTouched.Behaviors[1].ToString(), "TicTacToe.SecondaryDiagonalPieceBehavior");
 
             // secondary diagonal with same Icon
-            board.GetPeace(2, 0).Touch(PeaceIcon.X);
-            board.GetPeace(1, 1).Touch(PeaceIcon.X);
-            board.GetPeace(0, 2).Touch(PeaceIcon.X);
+            board.GetPiece(2, 0).Touch(PieceIcon.X);
+            board.GetPiece(1, 1).Touch(PieceIcon.X);
+            board.GetPiece(0, 2).Touch(PieceIcon.X);
 
-            Assert.AreEqual(currentPeaceTouched.CheckPeaceMatch(), true);
+            Assert.AreEqual(currentPieceTouched.CheckPieceMatch(), true);
 
             // secondary diagonal with one different element
-            board.GetPeace(2, 0).Touch(PeaceIcon.X);
-            board.GetPeace(1, 1).Touch(PeaceIcon.O);
-            board.GetPeace(0, 2).Touch(PeaceIcon.X);
+            board.GetPiece(2, 0).Touch(PieceIcon.X);
+            board.GetPiece(1, 1).Touch(PieceIcon.O);
+            board.GetPiece(0, 2).Touch(PieceIcon.X);
 
-            Assert.AreEqual(currentPeaceTouched.CheckPeaceMatch(), false);
+            Assert.AreEqual(currentPieceTouched.CheckPieceMatch(), false);
 
             // reset diagonal elements
-            board.GetPeace(2, 0).Touch(PeaceIcon.X);
-            board.GetPeace(1, 1).Touch(PeaceIcon.O);
-            board.GetPeace(0, 2).Touch(PeaceIcon.O);
+            board.GetPiece(2, 0).Touch(PieceIcon.X);
+            board.GetPiece(1, 1).Touch(PieceIcon.O);
+            board.GetPiece(0, 2).Touch(PieceIcon.O);
 
-            Assert.AreEqual(currentPeaceTouched.CheckPeaceMatch(), false);
+            Assert.AreEqual(currentPieceTouched.CheckPieceMatch(), false);
 
-            // set vertical elements to be the same as currentPeace
-            board.GetPeace(1, 1).Touch(PeaceIcon.X);
-            board.GetPeace(0, 2).Touch(PeaceIcon.X);
+            // set vertical elements to be the same as currentPiece
+            board.GetPiece(1, 1).Touch(PieceIcon.X);
+            board.GetPiece(0, 2).Touch(PieceIcon.X);
 
-            Assert.AreEqual(currentPeaceTouched.CheckPeaceMatch(), true);
+            Assert.AreEqual(currentPieceTouched.CheckPieceMatch(), true);
         }
     }
 }

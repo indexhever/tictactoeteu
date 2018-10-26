@@ -10,30 +10,30 @@ namespace TicTacToe.Test
     public class DrawConditonsTest
     {
         [Test]
-        public void Draw_WhenNoPlayerWonAndAllPeacesTouched()
+        public void Draw_WhenNoPlayerWonAndAllPiecesTouched()
         {
             int boardSize = 3;
             IObjectiveController objectiveController = NSubstitute.Substitute.For<IObjectiveController>();
             IBoardController boardController = NSubstitute.Substitute.For<IBoardController>();
             Board board = new Board(boardSize, objectiveController, boardController);
 
-            board.GetPeace(0, 0).Touch(PeaceIcon.O);
-            board.GetPeace(0, 1).Touch(PeaceIcon.X);
-            board.GetPeace(0, 2).Touch(PeaceIcon.X);
+            board.GetPiece(0, 0).Touch(PieceIcon.O);
+            board.GetPiece(0, 1).Touch(PieceIcon.X);
+            board.GetPiece(0, 2).Touch(PieceIcon.X);
 
-            board.GetPeace(1, 0).Touch(PeaceIcon.X);
-            board.GetPeace(1, 1).Touch(PeaceIcon.O);
-            board.GetPeace(1, 2).Touch(PeaceIcon.O);
+            board.GetPiece(1, 0).Touch(PieceIcon.X);
+            board.GetPiece(1, 1).Touch(PieceIcon.O);
+            board.GetPiece(1, 2).Touch(PieceIcon.O);
 
-            board.GetPeace(2, 0).Touch(PeaceIcon.O);
-            board.GetPeace(2, 1).Touch(PeaceIcon.X);
-            board.GetPeace(2, 2).Touch(PeaceIcon.X);
+            board.GetPiece(2, 0).Touch(PieceIcon.O);
+            board.GetPiece(2, 1).Touch(PieceIcon.X);
+            board.GetPiece(2, 2).Touch(PieceIcon.X);
 
-            Peace currentPeaceTouched = board.GetPeace(2, 2);
+            Piece currentPieceTouched = board.GetPiece(2, 2);
             // check if no player has won yet.
-            Assert.AreEqual(currentPeaceTouched.CheckPeaceMatch(), false);
-            // check if amount of eaces untouched by players has achieved the maximum (all peaces were touched)
-            Assert.LessOrEqual(board.AmountPeacesUntouched, 0);
+            Assert.AreEqual(currentPieceTouched.CheckPieceMatch(), false);
+            // check if amount of eaces untouched by players has achieved the maximum (all pieces were touched)
+            Assert.LessOrEqual(board.AmountPiecesUntouched, 0);
         }
     }
 }

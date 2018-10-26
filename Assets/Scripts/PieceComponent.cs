@@ -6,14 +6,14 @@ using UnityEngine.EventSystems;
 
 namespace TicTacToe
 {
-    public class PeaceComponent : MonoBehaviour, IPointerClickHandler
+    public class PieceComponent : MonoBehaviour, IPointerClickHandler
     {
-        private Peace peace;
+        private Piece peace;
         [SerializeField]
         private SpriteRenderer spriteRenderer;
 
         // TODO: initialize icon container
-        public void Initialize(Peace peace)
+        public void Initialize(Piece peace)
         {
             this.peace = peace;
         }
@@ -21,13 +21,13 @@ namespace TicTacToe
         public void OnPointerClick(PointerEventData eventData)
         {
             //peace.Touch(GetCurrentPlayerIcon());
-            Debug.Log("Peace pressed");
+            Debug.Log("Piece pressed");
         }
 
         // TODO: Get player icon from a player controller
-        private PeaceIcon GetCurrentPlayerIcon()
+        private PieceIcon GetCurrentPlayerIcon()
         {
-            return PeaceIcon.None;
+            return PieceIcon.None;
         }
 
         private void ChangeSpriteImage(Sprite newSprite)
