@@ -14,7 +14,8 @@ namespace TicTacToe.Test
         {
             int boardSize = 3;
             IObjectiveController objectiveController = NSubstitute.Substitute.For<IObjectiveController>();
-            Board board = new Board(boardSize, objectiveController);
+            IBoardController boardController = NSubstitute.Substitute.For<IBoardController>();
+            Board board = new Board(boardSize, objectiveController, boardController);
 
             board.GetPeace(0, 0).Touch(PeaceIcon.O);
             board.GetPeace(0, 1).Touch(PeaceIcon.X);
