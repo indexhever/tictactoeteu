@@ -4,10 +4,10 @@ using UnityEngine;
 
 namespace TicTacToe
 {
-    public abstract class AbstractPeaceBehavior
+    public abstract class AbstractPieceBehavior
     {
-        private Peace peace;
-        public Peace Peace
+        private Piece peace;
+        public Piece Piece
         {
             get
             {
@@ -19,7 +19,7 @@ namespace TicTacToe
             }
         }
         
-        public abstract bool CheckPeaceMatch(Board board);
+        public abstract bool CheckPieceMatch(Board board);
     }
 }
 
