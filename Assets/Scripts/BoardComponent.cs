@@ -11,17 +11,21 @@ namespace TicTacToe
         private Board board;
         [SerializeField]
         ObjectPoolController piecePool;
+        [SerializeField]
+        private float offsetBetweenPieces;
+        [SerializeField]
+        private int boardSize;
 
         public void Initialize()
         {
-            board = new Board(3, ObjectiveControler.Instance, this);
+            board = new Board(boardSize, ObjectiveControler.Instance, this);
         }
 
         public void SpawnPiece(Piece piece)
         {
             GameObject newPieceGameObj = piecePool.GetObject();
             PieceComponent peaceComponent = newPieceGameObj.GetComponent<PieceComponent>();
-            peaceComponent.Initialize(piece);
+            peaceComponent.Initialize(piece, transform.position, offsetBetweenPieces);
         }
     }
 }

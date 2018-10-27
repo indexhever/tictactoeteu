@@ -188,6 +188,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   piecePool: {fileID: 794996901}
+  offsetBetweenPieces: 3
+  boardSize: 3
 --- !u!4 &794996900
 Transform:
   m_ObjectHideFlags: 0
@@ -195,7 +197,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 794996898}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.231987, y: 0.045939498, z: 0.039699417}
+  m_LocalPosition: {x: -1.95, y: 1.52, z: 0.039699417}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
