@@ -23,12 +23,12 @@ namespace TicTacToe
 
         public void LoseGame()
         {
-            
+            Debug.Log("It is a draw");
         }
 
         public void WinGame()
         {
-            
+            Debug.Log("It is a win");
         }
     }
 }
