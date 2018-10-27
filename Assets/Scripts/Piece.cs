@@ -13,6 +13,7 @@ namespace TicTacToe
     public class Piece
     {
         private List<AbstractPieceBehavior> behaviors;
+        private IPositionHandler positionHandler;
         private int row;
         private Board board;
         public int Row
@@ -110,6 +111,16 @@ namespace TicTacToe
                 return false;
 
             return Icon == otherPiece.Icon;
+        }
+
+        public void UpdatePosition(Vector2 newPosition)
+        {
+
+        }
+
+        public void SetPositionHandler(IPositionHandler positionHandler)
+        {
+            this.positionHandler = positionHandler;
         }
     }
 }
