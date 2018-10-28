@@ -19,6 +19,7 @@ namespace TicTacToe
         public void Initialize()
         {
             board = new Board(boardSize, ObjectiveControler.Instance, this);
+            ObjectiveControler.Instance.OnResetGame += board.Reset;
         }
 
         public void SpawnPiece(Piece piece)
@@ -27,6 +28,10 @@ namespace TicTacToe
             PieceComponent peaceComponent = newPieceGameObj.GetComponent<PieceComponent>();
             peaceComponent.Initialize(piece, transform.position, offsetBetweenPieces);
             newPieceGameObj.transform.SetParent(transform);
+
+            // Set Reset event
+            ObjectiveControler.Instance.OnResetGame += piece.Reset;
+            ObjectiveControler.Instance.OnResetGame += peaceComponent.Reset;
         }
 
         public void Disable()

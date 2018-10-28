@@ -41,6 +41,9 @@ namespace TicTacToe
         // UI
         [SerializeField]
         private HudController hudController;
+        // Events
+        public delegate void ResetAction();
+        public event ResetAction OnResetGame;
 
         void Start()
         {
@@ -70,6 +73,15 @@ namespace TicTacToe
             hudController.ShowMessage("Player " + (currentPlayerID) + " win");
             boardComponent.Disable();
             Debug.Log("It is a win");
+        }
+
+        public void ResetGame()
+        {
+            currentPlayerID = 0;
+            boardComponent.Disable();
+            OnResetGame();
+            boardComponent.Enable();
+            ShowPlayerTurn();
         }
     }
 }

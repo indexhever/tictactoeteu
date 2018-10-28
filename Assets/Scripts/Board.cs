@@ -59,7 +59,7 @@ namespace TicTacToe
             pieces = new Piece[boardSize, boardSize];
 
             InitializePositions();
-            AmountPiecesUntouched = boardSize * boardSize;
+            AmountPiecesUntouched = SetupAmountPiecesUntouched();
             ObjectiveController = objectiveController;
         }
 
@@ -123,6 +123,16 @@ namespace TicTacToe
             {
                 ObjectiveController.LoseGame();
             }            
+        }
+
+        private int SetupAmountPiecesUntouched()
+        {
+            return boardSize * boardSize;
+        }
+
+        public void Reset()
+        {
+            AmountPiecesUntouched = SetupAmountPiecesUntouched();
         }
     }
 }
