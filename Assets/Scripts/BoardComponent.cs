@@ -26,6 +26,17 @@ namespace TicTacToe
             GameObject newPieceGameObj = piecePool.GetObject();
             PieceComponent peaceComponent = newPieceGameObj.GetComponent<PieceComponent>();
             peaceComponent.Initialize(piece, transform.position, offsetBetweenPieces);
+            newPieceGameObj.transform.SetParent(transform);
+        }
+
+        public void Disable()
+        {
+            gameObject.SetActive(false);
+        }
+
+        public void Enable()
+        {
+            gameObject.SetActive(true);
         }
     }
 }

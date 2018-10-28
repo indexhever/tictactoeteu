@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TicTacToe.Util;
 using System;
+using TicTacToe.UI;
 
 namespace TicTacToe
 {
@@ -10,6 +11,7 @@ namespace TicTacToe
     {
         [SerializeField]
         private BoardComponent boardComponent;
+        // Player
         [SerializeField]
         private Player[] players = new Player[2];
         private Player currentPlayer;
@@ -27,7 +29,7 @@ namespace TicTacToe
                     currentPlayer = players[currentPlayerID];
                     currentPlayerID = 0;
                 }
-
+                ShowPlayerTurn();
                 return currentPlayer;
             }
             set
@@ -36,6 +38,9 @@ namespace TicTacToe
             }
         }
         private int currentPlayerID;
+        // UI
+        [SerializeField]
+        private HudController hudController;
 
         void Start()
         {
@@ -45,15 +50,25 @@ namespace TicTacToe
         private void Initialize()
         {
             boardComponent.Initialize();
+            ShowPlayerTurn();
+        }
+
+        public void ShowPlayerTurn()
+        {
+            hudController.ShowMessage("Player " + (currentPlayerID + 1) + " turn");
         }
 
         public void LoseGame()
         {
+            hudController.ShowMessage("It is a draw!");
+            boardComponent.Disable();
             Debug.Log("It is a draw");
         }
 
         public void WinGame()
         {
+            hudController.ShowMessage("Player " + (currentPlayerID) + " win");
+            boardComponent.Disable();
             Debug.Log("It is a win");
         }
     }
