@@ -8,16 +8,14 @@ namespace TicTacToe
 {
     public class PieceComponent : MonoBehaviour, IPointerClickHandler, IPositionHandler
     {
-        private Piece peace;
+        private Piece piece;
         [SerializeField]
         private SpriteRenderer spriteRenderer;
 
         // TODO: initialize icon container
         public void Initialize(Piece peace)
         {
-            this.peace = peace;
-            this.peace.SetPositionHandler(this);
-            //spriteRenderer.sprite.pixelsPerUnit
+            this.piece = peace;
 
         }
 
@@ -30,8 +28,8 @@ namespace TicTacToe
         public void SetInitialPosition(Vector2 referencePosition, float offset)
         {
             Vector2 newPiecePosition = new Vector2();
-            newPiecePosition.x = referencePosition.x + spriteRenderer.sprite.bounds.extents.x * peace.Column * offset;
-            newPiecePosition.y = referencePosition.y - spriteRenderer.sprite.bounds.extents.y * peace.Row * offset;
+            newPiecePosition.x = referencePosition.x + spriteRenderer.sprite.bounds.extents.x * piece.Column * offset;
+            newPiecePosition.y = referencePosition.y - spriteRenderer.sprite.bounds.extents.y * piece.Row * offset;
             UpdatePosition(newPiecePosition);
         }
 
@@ -39,19 +37,23 @@ namespace TicTacToe
 
         public void OnPointerClick(PointerEventData eventData)
         {
-            //peace.Touch(GetCurrentPlayerIcon());
+            piece.Touch(GetCurrentPlayerIcon());
+            ChangeSpriteImage(piece.Icon);
+            if (piece.CheckPieceMatch())
+                ObjectiveControler.Instance.WinGame();
             Debug.Log("Piece pressed");
         }
 
         // TODO: Get player icon from a player controller
-        private PieceIcon GetCurrentPlayerIcon()
+        private IconType GetCurrentPlayerIcon()
         {
-            return PieceIcon.None;
+            Player currentPlayer = ObjectiveControler.Instance.CurrentPlayer;
+            return currentPlayer.iconType;
         }
 
-        private void ChangeSpriteImage(Sprite newSprite)
+        private void ChangeSpriteImage(IconType iconType)
         {
-            spriteRenderer.sprite = newSprite;
+            spriteRenderer.sprite = iconType.sprite;
         }
 
         public void UpdatePosition(Vector3 newPosition)
