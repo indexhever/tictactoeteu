@@ -11,12 +11,13 @@ namespace TicTacToe
         private Piece piece;
         [SerializeField]
         private SpriteRenderer spriteRenderer;
+        private Sprite initialSprite;
 
         // TODO: initialize icon container
         public void Initialize(Piece peace)
         {
             this.piece = peace;
-
+            initialSprite = spriteRenderer.sprite;
         }
 
         public void Initialize(Piece peace, Vector2 referencePosition, float offset)
@@ -53,12 +54,22 @@ namespace TicTacToe
 
         private void ChangeSpriteImage(IconType iconType)
         {
-            spriteRenderer.sprite = iconType.sprite;
+            ChangeSpriteImage(iconType.sprite);
+        }
+
+        private void ChangeSpriteImage(Sprite sprite)
+        {
+            spriteRenderer.sprite = sprite;
         }
 
         public void UpdatePosition(Vector3 newPosition)
         {
             transform.position = newPosition;
+        }
+
+        public void Reset()
+        {
+            ChangeSpriteImage(initialSprite);
         }
     }
 }
