@@ -113,6 +113,11 @@ namespace TicTacToe
 
             return Icon == otherPiece.Icon;
         }
+
+        public void Reset()
+        {
+            Icon = null;
+        }
     }
 }
 
