@@ -10,6 +10,32 @@ namespace TicTacToe
     {
         [SerializeField]
         private BoardComponent boardComponent;
+        [SerializeField]
+        private Player[] players = new Player[2];
+        private Player currentPlayer;
+        public Player CurrentPlayer
+        {
+            get
+            {
+                if (currentPlayerID == 0)
+                {
+                    currentPlayer = players[currentPlayerID];
+                    currentPlayerID++;
+                }
+                else
+                {
+                    currentPlayer = players[currentPlayerID];
+                    currentPlayerID = 0;
+                }
+
+                return currentPlayer;
+            }
+            set
+            {
+                currentPlayer = value;
+            }
+        }
+        private int currentPlayerID;
 
         void Start()
         {

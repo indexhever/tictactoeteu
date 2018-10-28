@@ -13,7 +13,6 @@ namespace TicTacToe
     public class Piece
     {
         private List<AbstractPieceBehavior> behaviors;
-        private IPositionHandler positionHandler;
         private int row;
         private Board board;
         public int Row
@@ -40,8 +39,8 @@ namespace TicTacToe
             }
         }
 
-        private PieceIcon icon;
-        public PieceIcon Icon
+        private IconType icon;
+        public IconType Icon
         {
             get
             {
@@ -94,15 +93,17 @@ namespace TicTacToe
             return false;
         }
 
-        public void Touch(PieceIcon pieceIcon)
+        public void Touch(IconType pieceIcon)
         {
             Icon = pieceIcon;
             board.PieceTouched();
+            
         }
 
+        // TODO: use Null object pattern
         public bool IsTouched()
         {
-            return Icon != PieceIcon.None;
+            return Icon != null;
         }
 
         public bool IsIconEqual(Piece otherPiece)
@@ -111,16 +112,6 @@ namespace TicTacToe
                 return false;
 
             return Icon == otherPiece.Icon;
-        }
-
-        public void UpdatePosition(Vector2 newPosition)
-        {
-
-        }
-
-        public void SetPositionHandler(IPositionHandler positionHandler)
-        {
-            this.positionHandler = positionHandler;
         }
     }
 }
