@@ -35,7 +35,7 @@ Play tests on [Unity Test Runner](https://docs.unity3d.com/Manual/testing-editor
 
 ## Contributing
 
-Please read [CONTRIBUTING.md](https://github.com/indexhever/tictactoeteu/blob/master/CONTRIBUTING.md) for details on the process for submitting pull requests to us and also check our [code of conduct](https://github.com/indexhever/tictactoeteu/blob/master/CODE_OF_CONDUCT.md) before making any change.
+Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on the process for submitting pull requests to us and also check our [code of conduct](CODE_OF_CONDUCT.md) before making any change.
 
 ## Versioning
 
