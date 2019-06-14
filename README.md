@@ -8,15 +8,11 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Prerequisites
 
-What things you need to install the software and how to install them
-
 * Unity LTS Release 2017.4.13f1
 * Android SDK
 
 
 ### Installing
-
-A step by step series of examples that tell you how to get a development env running
 
 * Install [Unity 2017.4.13f1](https://unity3d.com/unity/qa/lts-releases)
 * Setup [Android Environment](https://docs.unity3d.com/Manual/android-sdksetup.html)
