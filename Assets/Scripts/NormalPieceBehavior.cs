@@ -7,7 +7,7 @@ namespace TicTacToe
     public class NormalPieceBehavior : AbstractPieceBehavior
     {
         /// <summary>
-        /// Checks if this peace matches with other peaces in peace's same horizontal or vertical
+        /// Checks if this piece matches with other pieces in piece's same horizontal or vertical
         /// </summary>
         /// <param name="board"></param>
         /// <returns></returns>

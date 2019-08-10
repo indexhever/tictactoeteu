@@ -13,7 +13,7 @@ namespace TicTacToe.Test
         public void BoardGenerationWorks_WhenItIsInitiated()
         {
             int boardSize = 3;
-            IObjectiveController objectiveController = NSubstitute.Substitute.For<IObjectiveController>();
+            IGameController objectiveController = NSubstitute.Substitute.For<IGameController>();
             IBoardController boardController = NSubstitute.Substitute.For<IBoardController>();
             Board board = new Board(boardSize, objectiveController, boardController);
 
@@ -24,7 +24,7 @@ namespace TicTacToe.Test
         public void PiecesWithCorrectBehavior_AfterInitialized()
         {
             int boardSize = 3;
-            IObjectiveController objectiveController = NSubstitute.Substitute.For<IObjectiveController>();
+            IGameController objectiveController = NSubstitute.Substitute.For<IGameController>();
             IBoardController boardController = NSubstitute.Substitute.For<IBoardController>();
             Board board = new Board(boardSize, objectiveController, boardController);
 

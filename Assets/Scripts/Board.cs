@@ -6,8 +6,8 @@ namespace TicTacToe
 {
     public class Board
     {
-        IObjectiveController objectiveController;
-        public IObjectiveController ObjectiveController
+        IGameController objectiveController;
+        public IGameController ObjectiveController
         {
             get
             {
@@ -45,7 +45,7 @@ namespace TicTacToe
         }
         private Piece[,] pieces;
 
-        public Board(int boardSize, IObjectiveController objectiveController, IBoardController boardController)
+        public Board(int boardSize, IGameController objectiveController, IBoardController boardController)
         {
             
             ObjectiveController = objectiveController;

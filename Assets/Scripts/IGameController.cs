@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface IObjectiveController
+public interface IGameController
 {
     void WinGame();
     void LoseGame();

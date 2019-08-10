@@ -13,7 +13,7 @@ namespace TicTacToe.Test
         public void Draw_WhenNoPlayerWonAndAllPiecesTouched()
         {
             int boardSize = 3;
-            IObjectiveController objectiveController = NSubstitute.Substitute.For<IObjectiveController>();
+            IGameController objectiveController = NSubstitute.Substitute.For<IGameController>();
             IBoardController boardController = NSubstitute.Substitute.For<IBoardController>();
             Board board = new Board(boardSize, objectiveController, boardController);
             IconType player1Icon = new IconType();

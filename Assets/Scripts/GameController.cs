@@ -7,7 +7,7 @@ using TicTacToe.UI;
 
 namespace TicTacToe
 {
-    public class ObjectiveControler : Singleton<ObjectiveControler>, IObjectiveController
+    public class GameController : Singleton<GameController>, IGameController
     {
         [SerializeField]
         private BoardComponent boardComponent;

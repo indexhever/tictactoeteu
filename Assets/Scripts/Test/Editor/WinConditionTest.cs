@@ -13,7 +13,7 @@ namespace TicTacToe.Test
         public void Win_WhenHorizontalMatch()
         {
             int boardSize = 3;
-            IObjectiveController objectiveController = NSubstitute.Substitute.For<IObjectiveController>();
+            IGameController objectiveController = NSubstitute.Substitute.For<IGameController>();
             IBoardController boardController = NSubstitute.Substitute.For<IBoardController>();
             Board board = new Board(boardSize, objectiveController, boardController);
             Piece currentPieceTouched = board.GetPiece(0, 1);
@@ -35,7 +35,7 @@ namespace TicTacToe.Test
         public void Win_WhenVerticalMatch()
         {
             int boardSize = 3;
-            IObjectiveController objectiveController = NSubstitute.Substitute.For<IObjectiveController>();
+            IGameController objectiveController = NSubstitute.Substitute.For<IGameController>();
             IBoardController boardController = NSubstitute.Substitute.For<IBoardController>();
             Board board = new Board(boardSize, objectiveController, boardController);
             Piece currentPieceTouched = board.GetPiece(2, 0);
@@ -57,7 +57,7 @@ namespace TicTacToe.Test
         public void Win_WhenMainDiagonalMatch()
         {
             int boardSize = 3;
-            IObjectiveController objectiveController = NSubstitute.Substitute.For<IObjectiveController>();
+            IGameController objectiveController = NSubstitute.Substitute.For<IGameController>();
             IBoardController boardController = NSubstitute.Substitute.For<IBoardController>();
             Board board = new Board(boardSize, objectiveController, boardController);
             Piece currentPieceTouched = board.GetPiece(0, 0);
@@ -97,7 +97,7 @@ namespace TicTacToe.Test
         public void Win_WhenSecondaryDiagonalMatch()
         {
             int boardSize = 3;
-            IObjectiveController objectiveController = NSubstitute.Substitute.For<IObjectiveController>();
+            IGameController objectiveController = NSubstitute.Substitute.For<IGameController>();
             IBoardController boardController = NSubstitute.Substitute.For<IBoardController>();
             Board board = new Board(boardSize, objectiveController, boardController);
             Piece currentPieceTouched = board.GetPiece(2, 0);

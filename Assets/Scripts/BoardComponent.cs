@@ -18,20 +18,20 @@ namespace TicTacToe
 
         public void Initialize()
         {
-            board = new Board(boardSize, ObjectiveControler.Instance, this);
-            ObjectiveControler.Instance.OnResetGame += board.Reset;
+            board = new Board(boardSize, GameController.Instance, this);
+            GameController.Instance.OnResetGame += board.Reset;
         }
 
         public void SpawnPiece(Piece piece)
         {
             GameObject newPieceGameObj = piecePool.GetObject();
-            PieceComponent peaceComponent = newPieceGameObj.GetComponent<PieceComponent>();
-            peaceComponent.Initialize(piece, transform.position, offsetBetweenPieces);
+            PieceComponent pieceComponent = newPieceGameObj.GetComponent<PieceComponent>();
+            pieceComponent.Initialize(piece, transform.position, offsetBetweenPieces);
             newPieceGameObj.transform.SetParent(transform);
 
             // Set Reset event
-            ObjectiveControler.Instance.OnResetGame += piece.Reset;
-            ObjectiveControler.Instance.OnResetGame += peaceComponent.Reset;
+            GameController.Instance.OnResetGame += piece.Reset;
+            GameController.Instance.OnResetGame += pieceComponent.Reset;
         }
 
         public void Disable()

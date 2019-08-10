@@ -14,15 +14,15 @@ namespace TicTacToe
         private Sprite initialSprite;
 
         // TODO: initialize icon container
-        public void Initialize(Piece peace)
+        public void Initialize(Piece piece)
         {
-            this.piece = peace;
+            this.piece = piece;
             initialSprite = spriteRenderer.sprite;
         }
 
-        public void Initialize(Piece peace, Vector2 referencePosition, float offset)
+        public void Initialize(Piece piece, Vector2 referencePosition, float offset)
         {
-            Initialize(peace);
+            Initialize(piece);
             SetInitialPosition(referencePosition, offset);
         }
 
@@ -41,14 +41,14 @@ namespace TicTacToe
             piece.Touch(GetCurrentPlayerIcon());
             ChangeSpriteImage(piece.Icon);
             if (piece.CheckPieceMatch())
-                ObjectiveControler.Instance.WinGame();
+                GameController.Instance.WinGame();
             Debug.Log("Piece pressed");
         }
 
         // TODO: Get player icon from a player controller
         private IconType GetCurrentPlayerIcon()
         {
-            Player currentPlayer = ObjectiveControler.Instance.CurrentPlayer;
+            Player currentPlayer = GameController.Instance.CurrentPlayer;
             return currentPlayer.iconType;
         }
 

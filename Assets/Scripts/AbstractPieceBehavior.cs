@@ -6,16 +6,16 @@ namespace TicTacToe
 {
     public abstract class AbstractPieceBehavior
     {
-        private Piece peace;
+        private Piece piece;
         public Piece Piece
         {
             get
             {
-                return peace;
+                return piece;
             }
             set
             {
-                peace = value;
+                piece = value;
             }
         }
         
