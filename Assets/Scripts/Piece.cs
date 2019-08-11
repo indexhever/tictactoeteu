@@ -96,7 +96,7 @@ namespace TicTacToe
         public void Touch(IconType pieceIcon)
         {
             Icon = pieceIcon;
-            board.PieceTouched();
+            board.DecreaseAmountPiecesUntouched();
             
         }
 

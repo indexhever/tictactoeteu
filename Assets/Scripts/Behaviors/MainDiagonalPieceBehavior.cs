@@ -15,7 +15,7 @@ namespace TicTacToe
         {
             for(int i = 0; i < board.BoardSize; i++)
             {
-                if (!Piece.IsIconEqual(board.GetPiece(i, i)))
+                if (!Piece.IsIconEqual(board.GetPieceOnRowAndColumn(i, i)))
                     return false;
             }
 

@@ -11,6 +11,7 @@ namespace TicTacToe
         private int amountPiecesUntouched;
         private int boardSize;
         private Piece[,] pieces;
+        private PieceFactory pieceFactory;
 
         public int BoardSize
         {
@@ -29,6 +30,8 @@ namespace TicTacToe
         {            
             this.gameController = gameController;
             this.boardController = boardController;
+            pieceFactory = new PieceFactory(this);
+
             Initialize(boardSize);
         }
 
@@ -37,80 +40,50 @@ namespace TicTacToe
             BoardSize = boardSize;
             pieces = new Piece[boardSize, boardSize];
 
-            InitializePositions();
+            CreatePieces();
             amountPiecesUntouched = SetupAmountPiecesUntouched();
         }
 
-        private void InitializePositions()
+        private void CreatePieces()
         {
-            for(int i=0; i<BoardSize; i++)
+            for(int row=0; row<BoardSize; row++)
             {
-                for (int j = 0; j < boardSize; j++)
+                for (int column = 0; column < boardSize; column++)
                 {
-                    pieces[i, j] = CreatePiece(i, j);
-                    boardController.SpawnPiece(pieces[i, j]);
+                    pieces[row, column] = pieceFactory.CreateOnRowAndColumn(row, column);
+                    boardController.SpawnPiece(pieces[row, column]);
                 }
             }
-        }
+        }        
 
-        private Piece CreatePiece(int row, int column)
-        {
-            List<AbstractPieceBehavior> pieceBehaviors = CreatePieceBehavior(row, column);
-            Piece newPiece = new Piece(pieceBehaviors, row, column, this);
-            return newPiece;
-        }
-
-        private List<AbstractPieceBehavior> CreatePieceBehavior(int row, int column)
-        {
-            List<AbstractPieceBehavior> pieceBehaviors = new List<AbstractPieceBehavior>();
-            pieceBehaviors.Add(new NormalPieceBehavior());
-
-            if (!IsMainDiagonalPiece(row, column) && !IsSecondaryDiagonalPiece(row, column))
-                return pieceBehaviors;
-
-            if (IsMainDiagonalPiece(row, column))
-                pieceBehaviors.Add(new MainDiagonalPieceBehavior());
-
-            if (IsSecondaryDiagonalPiece(row, column))
-                pieceBehaviors.Add(new SecondaryDiagonalPieceBehavior());
-
-            return pieceBehaviors;
-        }
-
-        private bool IsMainDiagonalPiece(int row, int column)
-        {
-            return row == column;
-        }
-
-        private bool IsSecondaryDiagonalPiece(int row, int column)
-        {
-            return row + column == BoardSize - 1;
-        }
-
-        public Piece GetPiece(int row, int column)
+        public Piece GetPieceOnRowAndColumn(int row, int column)
         {
             return pieces[row, column];
         }
 
-        public void PieceTouched()
+        public void DecreaseAmountPiecesUntouched()
         {
             --amountPiecesUntouched;
 
-            // call draw
-            if (amountPiecesUntouched <= 0)
-            {
-                gameController.LoseGame();
-            }            
-        }
+            DrawGameIfAllPiecesTouched();
+        }        
 
-        private int SetupAmountPiecesUntouched()
+        private void DrawGameIfAllPiecesTouched()
         {
-            return boardSize * boardSize;
+            if (amountPiecesUntouched > 0)
+                return;
+
+            gameController.LoseGame();
         }
 
         public void Reset()
         {
             amountPiecesUntouched = SetupAmountPiecesUntouched();
+        }
+
+        private int SetupAmountPiecesUntouched()
+        {
+            return boardSize * boardSize;
         }
     }
 }

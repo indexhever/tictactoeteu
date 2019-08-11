@@ -19,19 +19,19 @@ namespace TicTacToe.Test
             IconType player1Icon = new IconType();
             IconType player2Icon = new IconType();
 
-            board.GetPiece(0, 0).Touch(player1Icon);
-            board.GetPiece(0, 1).Touch(player2Icon);
-            board.GetPiece(0, 2).Touch(player2Icon);
+            board.GetPieceOnRowAndColumn(0, 0).Touch(player1Icon);
+            board.GetPieceOnRowAndColumn(0, 1).Touch(player2Icon);
+            board.GetPieceOnRowAndColumn(0, 2).Touch(player2Icon);
 
-            board.GetPiece(1, 0).Touch(player2Icon);
-            board.GetPiece(1, 1).Touch(player1Icon);
-            board.GetPiece(1, 2).Touch(player1Icon);
+            board.GetPieceOnRowAndColumn(1, 0).Touch(player2Icon);
+            board.GetPieceOnRowAndColumn(1, 1).Touch(player1Icon);
+            board.GetPieceOnRowAndColumn(1, 2).Touch(player1Icon);
 
-            board.GetPiece(2, 0).Touch(player1Icon);
-            board.GetPiece(2, 1).Touch(player2Icon);
-            board.GetPiece(2, 2).Touch(player2Icon);
+            board.GetPieceOnRowAndColumn(2, 0).Touch(player1Icon);
+            board.GetPieceOnRowAndColumn(2, 1).Touch(player2Icon);
+            board.GetPieceOnRowAndColumn(2, 2).Touch(player2Icon);
 
-            Piece currentPieceTouched = board.GetPiece(2, 2);
+            Piece currentPieceTouched = board.GetPieceOnRowAndColumn(2, 2);
             // check if no player has won yet.
             Assert.AreEqual(currentPieceTouched.CheckPieceMatch(), false);
             // check if amount of eaces untouched by players has achieved the maximum (all pieces were touched)
