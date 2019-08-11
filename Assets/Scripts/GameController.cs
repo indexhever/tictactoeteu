@@ -17,8 +17,7 @@ namespace TicTacToe
         [SerializeField]
         private BoardComponent boardComponent;
         [SerializeField]
-        private HudController hudController;
-        
+        private HudController hudController;        
 
         public Player CurrentPlayer
         {

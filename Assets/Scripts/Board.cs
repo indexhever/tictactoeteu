@@ -6,32 +6,12 @@ namespace TicTacToe
 {
     public class Board
     {
-        IGameController objectiveController;
-        public IGameController ObjectiveController
-        {
-            get
-            {
-                return objectiveController;
-            }
-            set
-            {
-                objectiveController = value;
-            }
-        }
-        IBoardController boardController;
+        private IGameController gameController;
+        private IBoardController boardController;
         private int amountPiecesUntouched;
-        public int AmountPiecesUntouched
-        {
-            get
-            {
-                return amountPiecesUntouched;
-            }
-            private set
-            {
-                amountPiecesUntouched = value;
-            }
-        }
         private int boardSize;
+        private Piece[,] pieces;
+
         public int BoardSize
         {
             get
@@ -43,12 +23,11 @@ namespace TicTacToe
                 boardSize = value;
             }
         }
-        private Piece[,] pieces;
+        
 
-        public Board(int boardSize, IGameController objectiveController, IBoardController boardController)
-        {
-            
-            ObjectiveController = objectiveController;
+        public Board(int boardSize, IGameController gameController, IBoardController boardController)
+        {            
+            this.gameController = gameController;
             this.boardController = boardController;
             Initialize(boardSize);
         }
@@ -59,8 +38,7 @@ namespace TicTacToe
             pieces = new Piece[boardSize, boardSize];
 
             InitializePositions();
-            AmountPiecesUntouched = SetupAmountPiecesUntouched();
-            ObjectiveController = objectiveController;
+            amountPiecesUntouched = SetupAmountPiecesUntouched();
         }
 
         private void InitializePositions()
@@ -116,12 +94,12 @@ namespace TicTacToe
 
         public void PieceTouched()
         {
-            --AmountPiecesUntouched;
+            --amountPiecesUntouched;
 
             // call draw
-            if (AmountPiecesUntouched <= 0)
+            if (amountPiecesUntouched <= 0)
             {
-                ObjectiveController.LoseGame();
+                gameController.LoseGame();
             }            
         }
 
@@ -132,7 +110,7 @@ namespace TicTacToe
 
         public void Reset()
         {
-            AmountPiecesUntouched = SetupAmountPiecesUntouched();
+            amountPiecesUntouched = SetupAmountPiecesUntouched();
         }
     }
 }
