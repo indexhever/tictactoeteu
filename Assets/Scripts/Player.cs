@@ -8,5 +8,6 @@ namespace TicTacToe
     public class Player
     {
         public IconType iconType;
+        public string ID;
     }
 }

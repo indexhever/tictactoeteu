@@ -566,8 +566,10 @@ MonoBehaviour:
   players:
   - iconType:
       sprite: {fileID: 21300000, guid: c208415b635d14e44ba73c2ae4d60485, type: 3}
+    ID: O
   - iconType:
       sprite: {fileID: 21300000, guid: 796ebc72a2acebb47beafdc2452b8a90, type: 3}
+    ID: X
   hudController: {fileID: 1820284170}
 --- !u!4 &1886295825
 Transform:

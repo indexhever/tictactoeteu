@@ -9,38 +9,31 @@ namespace TicTacToe
 {
     public class GameController : Singleton<GameController>, IGameController
     {
-        [SerializeField]
-        private BoardComponent boardComponent;
-        // Player
+        
+        private Turn firstTurn;
+        private Player currentPlayer;        
         [SerializeField]
         private Player[] players = new Player[2];
-        private Player currentPlayer;
+        [SerializeField]
+        private BoardComponent boardComponent;
+        [SerializeField]
+        private HudController hudController;
+        
+
         public Player CurrentPlayer
         {
             get
             {
-                if (currentPlayerID == 0)
-                {
-                    currentPlayer = players[currentPlayerID];
-                    currentPlayerID++;
-                }
-                else
-                {
-                    currentPlayer = players[currentPlayerID];
-                    currentPlayerID = 0;
-                }
-                ShowPlayerTurn();
+                currentPlayer = CurrentTurn.Player;
                 return currentPlayer;
             }
-            set
+            private set
             {
                 currentPlayer = value;
             }
-        }
-        private int currentPlayerID;
-        // UI
-        [SerializeField]
-        private HudController hudController;
+        }        
+        public Turn CurrentTurn;
+        
         // Events
         public delegate void ResetAction();
         public event ResetAction OnResetGame;
@@ -52,13 +45,42 @@ namespace TicTacToe
 
         private void Initialize()
         {
-            boardComponent.Initialize();
+            SetupCircularTurns();
+            boardComponent.Initialize();      
+            ShowPlayerTurn();
+        }
+
+        private void SetupCircularTurns()
+        {
+            firstTurn = new Turn(players[0]);
+            Turn previousTurn = firstTurn;
+            Turn currentTurn = null;
+
+            for (int i=1; i<players.Length; i++)
+            {
+                currentTurn = new Turn(players[i]);
+                previousTurn.NextTurn = currentTurn;
+                previousTurn = currentTurn;
+            }
+
+            // Setup single player game
+            if (currentTurn == null)
+                return;
+
+            currentTurn.NextTurn = firstTurn;
+            CurrentTurn = firstTurn;
+            CurrentPlayer = CurrentTurn.Player;
+        }
+
+        public void UpdateTurn()
+        {
+            CurrentTurn = CurrentTurn.NextTurn;
             ShowPlayerTurn();
         }
 
         public void ShowPlayerTurn()
         {
-            hudController.ShowMessage("Player " + (currentPlayerID + 1) + " turn");
+            hudController.ShowMessage("Player " + (CurrentPlayer.ID) + " turn");
         }
 
         public void LoseGame()
@@ -70,14 +92,14 @@ namespace TicTacToe
 
         public void WinGame()
         {
-            hudController.ShowMessage("Player " + (currentPlayerID) + " win");
+            hudController.ShowMessage("Player " + (CurrentPlayer.ID) + " win");
             boardComponent.Disable();
             Debug.Log("It is a win");
         }
 
         public void ResetGame()
         {
-            currentPlayerID = 0;
+            CurrentTurn = firstTurn;
             boardComponent.Disable();
             OnResetGame();
             boardComponent.Enable();

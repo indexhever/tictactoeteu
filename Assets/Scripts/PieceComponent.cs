@@ -42,6 +42,8 @@ namespace TicTacToe
             ChangeSpriteImage(piece.Icon);
             if (piece.CheckPieceMatch())
                 GameController.Instance.WinGame();
+            else
+                GameController.Instance.UpdateTurn();
             Debug.Log("Piece pressed");
         }
 
