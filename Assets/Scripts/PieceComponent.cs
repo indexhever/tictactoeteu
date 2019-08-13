@@ -38,7 +38,7 @@ namespace TicTacToe
 
         public void OnPointerClick(PointerEventData eventData)
         {
-            piece.Touch(GetCurrentPlayerIcon());
+            piece.PaintWithIcon(GetCurrentPlayerIcon());
             ChangeSpriteImage(piece.Icon);
             if (piece.CheckPieceMatch())
                 GameController.Instance.WinGame();
@@ -48,13 +48,13 @@ namespace TicTacToe
         }
 
         // TODO: Get player icon from a player controller
-        private IconType GetCurrentPlayerIcon()
+        private Icon GetCurrentPlayerIcon()
         {
             Player currentPlayer = GameController.Instance.CurrentPlayer;
-            return currentPlayer.iconType;
+            return currentPlayer.Icon;
         }
 
-        private void ChangeSpriteImage(IconType iconType)
+        private void ChangeSpriteImage(Icon iconType)
         {
             ChangeSpriteImage(iconType.sprite);
         }

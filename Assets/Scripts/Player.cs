@@ -7,7 +7,7 @@ namespace TicTacToe
     [System.Serializable]
     public class Player
     {
-        public IconType iconType;
+        public Icon Icon;
         public string ID;
     }
 }

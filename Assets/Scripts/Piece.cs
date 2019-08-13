@@ -4,17 +4,14 @@ using UnityEngine;
 
 namespace TicTacToe
 {
-    public enum PieceIcon
-    {
-        None,
-        O,
-        X
-    }
     public class Piece
     {
         private List<AbstractPieceBehavior> behaviors;
         private int row;
-        private Board board;
+        private int column;
+        private Board board;        
+        private Icon icon;
+
         public int Row
         {
             get
@@ -26,7 +23,6 @@ namespace TicTacToe
                 row = value;
             }
         }
-        private int column;
         public int Column
         {
             get
@@ -38,9 +34,7 @@ namespace TicTacToe
                 column = value;
             }
         }
-
-        private IconType icon;
-        public IconType Icon
+        public Icon Icon
         {
             get
             {
@@ -51,7 +45,6 @@ namespace TicTacToe
                 icon = value;
             }
         }
-
         public List<AbstractPieceBehavior> Behaviors
         {
             get
@@ -78,7 +71,7 @@ namespace TicTacToe
         {
             for(int i=0; i < Behaviors.Count; i++)
             {
-                Behaviors[i].Piece = this;
+                Behaviors[i].Initialize(this);
             }
         }
 
@@ -93,25 +86,24 @@ namespace TicTacToe
             return false;
         }
 
-        public void Touch(IconType pieceIcon)
+        public void PaintWithIcon(Icon pieceIcon)
         {
             Icon = pieceIcon;
             board.DecreaseAmountPiecesUntouched();
             
         }
 
-        // TODO: use Null object pattern
-        public bool IsTouched()
+        public bool IsPainted()
         {
             return Icon != null;
         }
 
-        public bool IsIconEqual(Piece otherPiece)
+        public bool IsIconEqualToIconFromPiece(Piece otherPiece)
         {
-            if (!IsTouched())
+            if (!IsPainted())
                 return false;
 
-            return Icon == otherPiece.Icon;
+            return Icon.Equals(otherPiece.Icon);
         }
 
         public void Reset()

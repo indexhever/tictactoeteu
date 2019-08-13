@@ -18,16 +18,16 @@ namespace TicTacToe.Test
             Board board = new Board(boardSize, objectiveController, boardController);
             Piece currentPieceTouched = board.GetPieceOnRowAndColumn(0, 1);
             Assert.AreEqual(currentPieceTouched.Behaviors[0].ToString(), "TicTacToe.NormalPieceBehavior");
-            IconType player1Icon = new IconType();
-            IconType player2Icon = new IconType();
+            Icon player1Icon = new Icon();
+            Icon player2Icon = new Icon();
 
-            board.GetPieceOnRowAndColumn(0, 1).Touch(player2Icon);
-            board.GetPieceOnRowAndColumn(0, 0).Touch(player2Icon);
-            board.GetPieceOnRowAndColumn(0, 2).Touch(player2Icon);
+            board.GetPieceOnRowAndColumn(0, 1).PaintWithIcon(player2Icon);
+            board.GetPieceOnRowAndColumn(0, 0).PaintWithIcon(player2Icon);
+            board.GetPieceOnRowAndColumn(0, 2).PaintWithIcon(player2Icon);
             Assert.AreEqual(currentPieceTouched.CheckPieceMatch(), true);
-            board.GetPieceOnRowAndColumn(0, 1).Touch(player2Icon);
-            board.GetPieceOnRowAndColumn(0, 0).Touch(player1Icon);
-            board.GetPieceOnRowAndColumn(0, 2).Touch(player2Icon);
+            board.GetPieceOnRowAndColumn(0, 1).PaintWithIcon(player2Icon);
+            board.GetPieceOnRowAndColumn(0, 0).PaintWithIcon(player1Icon);
+            board.GetPieceOnRowAndColumn(0, 2).PaintWithIcon(player2Icon);
             Assert.AreEqual(currentPieceTouched.CheckPieceMatch(), false);
         }
 
@@ -40,16 +40,16 @@ namespace TicTacToe.Test
             Board board = new Board(boardSize, objectiveController, boardController);
             Piece currentPieceTouched = board.GetPieceOnRowAndColumn(2, 0);
             Assert.AreEqual(currentPieceTouched.Behaviors[0].ToString(), "TicTacToe.NormalPieceBehavior");
-            IconType player1Icon = new IconType();
-            IconType player2Icon = new IconType();
+            Icon player1Icon = new Icon();
+            Icon player2Icon = new Icon();
 
-            board.GetPieceOnRowAndColumn(0, 0).Touch(player2Icon);
-            board.GetPieceOnRowAndColumn(1, 0).Touch(player2Icon);
-            board.GetPieceOnRowAndColumn(2, 0).Touch(player2Icon);
+            board.GetPieceOnRowAndColumn(0, 0).PaintWithIcon(player2Icon);
+            board.GetPieceOnRowAndColumn(1, 0).PaintWithIcon(player2Icon);
+            board.GetPieceOnRowAndColumn(2, 0).PaintWithIcon(player2Icon);
             Assert.AreEqual(currentPieceTouched.CheckPieceMatch(), true);
-            board.GetPieceOnRowAndColumn(0, 0).Touch(player2Icon);
-            board.GetPieceOnRowAndColumn(1, 0).Touch(player1Icon);
-            board.GetPieceOnRowAndColumn(2, 0).Touch(player2Icon);
+            board.GetPieceOnRowAndColumn(0, 0).PaintWithIcon(player2Icon);
+            board.GetPieceOnRowAndColumn(1, 0).PaintWithIcon(player1Icon);
+            board.GetPieceOnRowAndColumn(2, 0).PaintWithIcon(player2Icon);
             Assert.AreEqual(currentPieceTouched.CheckPieceMatch(), false);
         }
 
@@ -62,33 +62,33 @@ namespace TicTacToe.Test
             Board board = new Board(boardSize, objectiveController, boardController);
             Piece currentPieceTouched = board.GetPieceOnRowAndColumn(0, 0);
             Assert.AreEqual(currentPieceTouched.Behaviors[1].ToString(), "TicTacToe.MainDiagonalPieceBehavior");
-            IconType player1Icon = new IconType();
-            IconType player2Icon = new IconType();
+            Icon player1Icon = new Icon();
+            Icon player2Icon = new Icon();
 
             // main diagonal with same Icon
-            board.GetPieceOnRowAndColumn(0, 0).Touch(player2Icon);
-            board.GetPieceOnRowAndColumn(1, 1).Touch(player2Icon);
-            board.GetPieceOnRowAndColumn(2, 2).Touch(player2Icon);
+            board.GetPieceOnRowAndColumn(0, 0).PaintWithIcon(player2Icon);
+            board.GetPieceOnRowAndColumn(1, 1).PaintWithIcon(player2Icon);
+            board.GetPieceOnRowAndColumn(2, 2).PaintWithIcon(player2Icon);
 
             Assert.AreEqual(currentPieceTouched.CheckPieceMatch(), true);
 
             // main diagonal with one different element
-            board.GetPieceOnRowAndColumn(0, 0).Touch(player2Icon);
-            board.GetPieceOnRowAndColumn(1, 1).Touch(player1Icon);
-            board.GetPieceOnRowAndColumn(2, 2).Touch(player2Icon);
+            board.GetPieceOnRowAndColumn(0, 0).PaintWithIcon(player2Icon);
+            board.GetPieceOnRowAndColumn(1, 1).PaintWithIcon(player1Icon);
+            board.GetPieceOnRowAndColumn(2, 2).PaintWithIcon(player2Icon);
 
             Assert.AreEqual(currentPieceTouched.CheckPieceMatch(), false);
 
             // reset diagonal elements
-            board.GetPieceOnRowAndColumn(0, 0).Touch(player2Icon);
-            board.GetPieceOnRowAndColumn(1, 1).Touch(player1Icon);
-            board.GetPieceOnRowAndColumn(2, 2).Touch(player1Icon);
+            board.GetPieceOnRowAndColumn(0, 0).PaintWithIcon(player2Icon);
+            board.GetPieceOnRowAndColumn(1, 1).PaintWithIcon(player1Icon);
+            board.GetPieceOnRowAndColumn(2, 2).PaintWithIcon(player1Icon);
 
             Assert.AreEqual(currentPieceTouched.CheckPieceMatch(), false);
 
             // set vertical elements to be the same as currentPiece
-            board.GetPieceOnRowAndColumn(1, 0).Touch(player2Icon);
-            board.GetPieceOnRowAndColumn(2, 0).Touch(player2Icon);
+            board.GetPieceOnRowAndColumn(1, 0).PaintWithIcon(player2Icon);
+            board.GetPieceOnRowAndColumn(2, 0).PaintWithIcon(player2Icon);
 
             Assert.AreEqual(currentPieceTouched.CheckPieceMatch(), true);
         }
@@ -102,33 +102,33 @@ namespace TicTacToe.Test
             Board board = new Board(boardSize, objectiveController, boardController);
             Piece currentPieceTouched = board.GetPieceOnRowAndColumn(2, 0);
             Assert.AreEqual(currentPieceTouched.Behaviors[1].ToString(), "TicTacToe.SecondaryDiagonalPieceBehavior");
-            IconType player1Icon = new IconType();
-            IconType player2Icon = new IconType();
+            Icon player1Icon = new Icon();
+            Icon player2Icon = new Icon();
 
             // secondary diagonal with same Icon
-            board.GetPieceOnRowAndColumn(2, 0).Touch(player2Icon);
-            board.GetPieceOnRowAndColumn(1, 1).Touch(player2Icon);
-            board.GetPieceOnRowAndColumn(0, 2).Touch(player2Icon);
+            board.GetPieceOnRowAndColumn(2, 0).PaintWithIcon(player2Icon);
+            board.GetPieceOnRowAndColumn(1, 1).PaintWithIcon(player2Icon);
+            board.GetPieceOnRowAndColumn(0, 2).PaintWithIcon(player2Icon);
 
             Assert.AreEqual(currentPieceTouched.CheckPieceMatch(), true);
 
             // secondary diagonal with one different element
-            board.GetPieceOnRowAndColumn(2, 0).Touch(player2Icon);
-            board.GetPieceOnRowAndColumn(1, 1).Touch(player1Icon);
-            board.GetPieceOnRowAndColumn(0, 2).Touch(player2Icon);
+            board.GetPieceOnRowAndColumn(2, 0).PaintWithIcon(player2Icon);
+            board.GetPieceOnRowAndColumn(1, 1).PaintWithIcon(player1Icon);
+            board.GetPieceOnRowAndColumn(0, 2).PaintWithIcon(player2Icon);
 
             Assert.AreEqual(currentPieceTouched.CheckPieceMatch(), false);
 
             // reset diagonal elements
-            board.GetPieceOnRowAndColumn(2, 0).Touch(player2Icon);
-            board.GetPieceOnRowAndColumn(1, 1).Touch(player1Icon);
-            board.GetPieceOnRowAndColumn(0, 2).Touch(player1Icon);
+            board.GetPieceOnRowAndColumn(2, 0).PaintWithIcon(player2Icon);
+            board.GetPieceOnRowAndColumn(1, 1).PaintWithIcon(player1Icon);
+            board.GetPieceOnRowAndColumn(0, 2).PaintWithIcon(player1Icon);
 
             Assert.AreEqual(currentPieceTouched.CheckPieceMatch(), false);
 
             // set vertical elements to be the same as currentPiece
-            board.GetPieceOnRowAndColumn(1, 1).Touch(player2Icon);
-            board.GetPieceOnRowAndColumn(0, 2).Touch(player2Icon);
+            board.GetPieceOnRowAndColumn(1, 1).PaintWithIcon(player2Icon);
+            board.GetPieceOnRowAndColumn(0, 2).PaintWithIcon(player2Icon);
 
             Assert.AreEqual(currentPieceTouched.CheckPieceMatch(), true);
         }

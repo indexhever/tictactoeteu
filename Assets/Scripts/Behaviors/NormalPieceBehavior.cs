@@ -30,12 +30,12 @@ namespace TicTacToe
 
         private bool HasHorizontalMatch(Board board, int i)
         {
-            return Piece.IsIconEqual(board.GetPieceOnRowAndColumn(Piece.Row, i));
+            return Piece.IsIconEqualToIconFromPiece(board.GetPieceOnRowAndColumn(Piece.Row, i));
         }
 
         private bool HasVerticalMatch(Board board, int i)
         {
-            return Piece.IsIconEqual(board.GetPieceOnRowAndColumn(i, Piece.Column));
+            return Piece.IsIconEqualToIconFromPiece(board.GetPieceOnRowAndColumn(i, Piece.Column));
         }
     }
 }
