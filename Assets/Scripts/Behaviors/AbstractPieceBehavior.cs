@@ -13,10 +13,15 @@ namespace TicTacToe
             {
                 return piece;
             }
-            set
+            private set
             {
                 piece = value;
             }
+        }
+
+        public virtual void Initialize(Piece piece)
+        {
+            Piece = piece;
         }
         
         public abstract bool CheckPieceMatch(Board board);

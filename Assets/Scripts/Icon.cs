@@ -6,7 +6,7 @@ using System;
 namespace TicTacToe
 {
     [Serializable]
-    public class IconType
+    public class Icon
     {
         public Sprite sprite;
     }
