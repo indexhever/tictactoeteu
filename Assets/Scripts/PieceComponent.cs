@@ -13,7 +13,6 @@ namespace TicTacToe
         private SpriteRenderer spriteRenderer;
         private Sprite initialSprite;
 
-        // TODO: initialize icon container
         public void Initialize(Piece piece)
         {
             this.piece = piece;
@@ -38,21 +37,21 @@ namespace TicTacToe
 
         public void OnPointerClick(PointerEventData eventData)
         {
-            piece.Touch(GetCurrentPlayerIcon());
+            piece.PaintWithIcon(GetCurrentPlayerIcon());
             ChangeSpriteImage(piece.Icon);
             if (piece.CheckPieceMatch())
                 GameController.Instance.WinGame();
-            Debug.Log("Piece pressed");
+            else
+                GameController.Instance.UpdateTurn();
         }
 
-        // TODO: Get player icon from a player controller
-        private IconType GetCurrentPlayerIcon()
+        private Icon GetCurrentPlayerIcon()
         {
             Player currentPlayer = GameController.Instance.CurrentPlayer;
-            return currentPlayer.iconType;
+            return currentPlayer.Icon;
         }
 
-        private void ChangeSpriteImage(IconType iconType)
+        private void ChangeSpriteImage(Icon iconType)
         {
             ChangeSpriteImage(iconType.sprite);
         }

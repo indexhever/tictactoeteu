@@ -562,12 +562,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7eadd8c26bb3c3409c2151583dc425e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  boardComponent: {fileID: 794996899}
   players:
-  - iconType:
+  - Icon:
       sprite: {fileID: 21300000, guid: c208415b635d14e44ba73c2ae4d60485, type: 3}
-  - iconType:
+    ID: O
+  - Icon:
       sprite: {fileID: 21300000, guid: 796ebc72a2acebb47beafdc2452b8a90, type: 3}
+    ID: X
+  boardComponent: {fileID: 794996899}
   hudController: {fileID: 1820284170}
 --- !u!4 &1886295825
 Transform:
