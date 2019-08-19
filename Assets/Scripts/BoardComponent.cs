@@ -11,24 +11,26 @@ namespace TicTacToe
     {
         private Board board;
         [SerializeField]
-        ObjectPoolController piecePool;
-        [SerializeField]
         private float offsetBetweenPieces;
         [SerializeField]
         private int boardSize;
         private GameController gameController;
         private PieceComponent.Factory pieceComponentFactory;
+        private Board.Factory boardFactory;
 
         [Inject]
-        public void Construct(GameController gameController, PieceComponent.Factory pieceFactory)
+        public void Construct(GameController gameController, PieceComponent.Factory pieceFactory, Board.Factory boardFactory)
         {
             this.gameController = gameController;
             this.pieceComponentFactory = pieceFactory;
+            this.boardFactory = boardFactory;
         }
 
         public void Initialize()
         {
-            board = new Board(boardSize, gameController, this);
+            board = boardFactory.Create(boardSize);
+            board.Initialize();
+
             gameController.OnResetGame += board.Reset;
         }
 

@@ -122,7 +122,6 @@ GameObject:
   m_Component:
   - component: {fileID: 794996900}
   - component: {fileID: 794996899}
-  - component: {fileID: 794996901}
   m_Layer: 0
   m_Name: Board
   m_TagString: Untagged
@@ -141,7 +140,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8eb80d640935d3443ab26ed8c953102e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  piecePool: {fileID: 794996901}
   offsetBetweenPieces: 3
   boardSize: 3
 --- !u!4 &794996900
@@ -157,18 +155,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &794996901
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 794996898}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b36f105c4e00094419b21b1049e14028, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  prefab: {fileID: 1097696870393802, guid: c02abf81dadf03543afc8c478ee81865, type: 2}
 --- !u!1 &861413934
 GameObject:
   m_ObjectHideFlags: 0

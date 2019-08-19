@@ -1,13 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 namespace TicTacToe
 {
     public class Board
     {
-        private IGameController gameController;
-        private IBoardController boardController;
+        private GameController gameController;
+        private BoardComponent boardController;
         private int amountPiecesUntouched;
         private int boardSize;
         private Piece[,] pieces;
@@ -25,21 +26,22 @@ namespace TicTacToe
             }
         }
         
-
-        public Board(int boardSize, IGameController gameController, IBoardController boardController)
-        {            
-            this.gameController = gameController;
-            this.boardController = boardController;
-            pieceFactory = new PieceFactory(this);
-
-            Initialize(boardSize);
-        }
-
-        private void Initialize(int boardSize)
+        [Inject]
+        public Board(
+            int boardSize, 
+            GameController gameController, 
+            BoardComponent boardController,
+            PieceFactory pieceFactory)
         {
             BoardSize = boardSize;
             pieces = new Piece[boardSize, boardSize];
+            this.gameController = gameController;
+            this.boardController = boardController;
+            this.pieceFactory = pieceFactory;            
+        }
 
+        public void Initialize()
+        {
             CreatePieces();
             amountPiecesUntouched = SetupAmountPiecesUntouched();
         }
@@ -50,7 +52,7 @@ namespace TicTacToe
             {
                 for (int column = 0; column < boardSize; column++)
                 {
-                    pieces[row, column] = pieceFactory.CreateOnRowAndColumn(row, column);
+                    pieces[row, column] = pieceFactory.Create(this, row, column);
                     boardController.SpawnPiece(pieces[row, column]);
                 }
             }
@@ -84,6 +86,11 @@ namespace TicTacToe
         private int SetupAmountPiecesUntouched()
         {
             return boardSize * boardSize;
+        }
+
+        public class Factory : PlaceholderFactory<int, Board>
+        {
+
         }
     }
 }

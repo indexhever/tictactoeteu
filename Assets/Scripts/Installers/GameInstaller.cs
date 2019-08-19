@@ -28,12 +28,28 @@ namespace TicTacToe
                 .AsSingle()
                 .NonLazy();
 
-            InstallPieceComponent();
+            InstallBoardFactory();
+            InstallPieceComponentFactory();
+            InstallPieceFactory();
         }
 
-        private void InstallPieceComponent()
+        private void InstallBoardFactory()
         {
-            Container.BindFactory<Piece, PieceComponent, PieceComponent.Factory>().FromComponentInNewPrefab(piecePrefab);
+            Container.BindFactory<int, Board, Board.Factory>()
+                .AsSingle();
+        }
+
+        private void InstallPieceComponentFactory()
+        {
+            Container.BindFactory<Piece, PieceComponent, PieceComponent.Factory>()
+                .FromComponentInNewPrefab(piecePrefab)
+                .AsSingle();
+        }
+
+        private void InstallPieceFactory()
+        {
+            Container.BindFactory<Board, int, int, Piece, PieceFactory>()
+                .AsSingle();
         }
     }
 }

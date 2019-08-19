@@ -1,18 +1,20 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 namespace TicTacToe
 {
-    public class PieceFactory
+    public class PieceFactory : PlaceholderFactory<Board, int, int, Piece>
     {
         private int row;
         private int column;
         private Board board;
 
-        public PieceFactory(Board board)
+        public override Piece Create(Board board, int row, int column)
         {
             this.board = board;
+            return CreateOnRowAndColumn(row, column);
         }
 
         public Piece CreateOnRowAndColumn(int row, int column)
