@@ -3,25 +3,28 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using Zenject;
 
 namespace TicTacToe
 {
     public class PieceComponent : MonoBehaviour, IPointerClickHandler, IPositionHandler
     {
+        private Sprite initialSprite;
+        private GameController gameController;
         private Piece piece;
         [SerializeField]
-        private SpriteRenderer spriteRenderer;
-        private Sprite initialSprite;
+        private SpriteRenderer spriteRenderer;        
 
-        public void Initialize(Piece piece)
+        [Inject]
+        public void Construct(GameController gameController, Piece piece)
         {
+            this.gameController = gameController;
             this.piece = piece;
-            initialSprite = spriteRenderer.sprite;
         }
 
-        public void Initialize(Piece piece, Vector2 referencePosition, float offset)
+        public void Initialize(Vector2 referencePosition, float offset)
         {
-            Initialize(piece);
+            initialSprite = spriteRenderer.sprite;
             SetInitialPosition(referencePosition, offset);
         }
 
@@ -33,21 +36,19 @@ namespace TicTacToe
             UpdatePosition(newPiecePosition);
         }
 
-
-
         public void OnPointerClick(PointerEventData eventData)
         {
             piece.PaintWithIcon(GetCurrentPlayerIcon());
             ChangeSpriteImage(piece.Icon);
             if (piece.CheckPieceMatch())
-                GameController.Instance.WinGame();
+                gameController.WinGame();
             else
-                GameController.Instance.UpdateTurn();
+                gameController.UpdateTurn();
         }
 
         private Icon GetCurrentPlayerIcon()
         {
-            Player currentPlayer = GameController.Instance.CurrentPlayer;
+            Player currentPlayer = gameController.CurrentPlayer;
             return currentPlayer.Icon;
         }
 
@@ -69,6 +70,11 @@ namespace TicTacToe
         public void Reset()
         {
             ChangeSpriteImage(initialSprite);
+        }
+
+        public class Factory : PlaceholderFactory<Piece, PieceComponent>
+        {
+
         }
     }
 }

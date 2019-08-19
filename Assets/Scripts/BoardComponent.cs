@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TicTacToe.Util;
+using Zenject;
 
 namespace TicTacToe
 {
@@ -10,28 +11,38 @@ namespace TicTacToe
     {
         private Board board;
         [SerializeField]
-        ObjectPoolController piecePool;
-        [SerializeField]
         private float offsetBetweenPieces;
         [SerializeField]
         private int boardSize;
+        private GameController gameController;
+        private PieceComponent.Factory pieceComponentFactory;
+        private Board.Factory boardFactory;
+
+        [Inject]
+        public void Construct(GameController gameController, PieceComponent.Factory pieceFactory, Board.Factory boardFactory)
+        {
+            this.gameController = gameController;
+            this.pieceComponentFactory = pieceFactory;
+            this.boardFactory = boardFactory;
+        }
 
         public void Initialize()
         {
-            board = new Board(boardSize, GameController.Instance, this);
-            GameController.Instance.OnResetGame += board.Reset;
+            board = boardFactory.Create(boardSize);
+            board.Initialize();
+
+            gameController.OnResetGame += board.Reset;
         }
 
         public void SpawnPiece(Piece piece)
         {
-            GameObject newPieceGameObj = piecePool.GetObject();
-            PieceComponent pieceComponent = newPieceGameObj.GetComponent<PieceComponent>();
-            pieceComponent.Initialize(piece, transform.position, offsetBetweenPieces);
-            newPieceGameObj.transform.SetParent(transform);
+            PieceComponent pieceComponent = pieceComponentFactory.Create(piece);
+            pieceComponent.Initialize(transform.position, offsetBetweenPieces);
+            pieceComponent.transform.SetParent(transform);
 
             // Set Reset event
-            GameController.Instance.OnResetGame += piece.Reset;
-            GameController.Instance.OnResetGame += pieceComponent.Reset;
+            gameController.OnResetGame += piece.Reset;
+            gameController.OnResetGame += pieceComponent.Reset;
         }
 
         public void Disable()

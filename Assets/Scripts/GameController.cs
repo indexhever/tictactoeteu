@@ -4,19 +4,17 @@ using UnityEngine;
 using TicTacToe.Util;
 using System;
 using TicTacToe.UI;
+using Zenject;
 
 namespace TicTacToe
 {
-    public class GameController : Singleton<GameController>, IGameController
-    {
-        
+    public class GameController : MonoBehaviour, IGameController
+    {        
         private Turn firstTurn;
         private Player currentPlayer;        
         [SerializeField]
         private Player[] players = new Player[2];
-        [SerializeField]
         private BoardComponent boardComponent;
-        [SerializeField]
         private HudController hudController;        
 
         public Player CurrentPlayer
@@ -36,6 +34,13 @@ namespace TicTacToe
         // Events
         public delegate void ResetAction();
         public event ResetAction OnResetGame;
+
+        [Inject]
+        public void Construct(BoardComponent boardComponent, HudController hudController)
+        {
+            this.boardComponent = boardComponent;
+            this.hudController = hudController;
+        }
 
         void Start()
         {
